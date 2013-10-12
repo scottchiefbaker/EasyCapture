@@ -62,7 +62,7 @@ class ec_page {
 	}
 
 	function error($html) {
-		$content = join("",file('xhtml-template.html'));
+		$content = join("",file('html-template.html'));
 	
 		#$style = $this->default_style();
 		if ($this->script) {
