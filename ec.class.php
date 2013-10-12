@@ -188,7 +188,15 @@ class ec_page {
 
 		$show_stats = 1;
 		if ($show_stats) {
-			$info = glob($this->full_dir . "/*");
+			$glob = glob($this->full_dir . "/*");
+			$info = array();
+
+			// Only count files (not dirs)
+			foreach ($glob as $i) {
+				if (is_file($i)) {
+					$info[] = $i;
+				}
+			}
 
 			// Calc the size for each file (in bytes)
 			foreach ($info as $file) {
@@ -307,9 +315,9 @@ class ec_page {
 		$filter_html = "<b>Filter:</b> <form method=\"get\" action=\"$PHP_SELF\" style=\"display: inline;\"><input type=\"input\" class=\"footer_input\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form>";
 
 		$this->footer .= "<div class=\"gallery_footer\">
-			<div class=\"footer_right\">$newer_html</div>
+			<div class=\"footer_right\">$older_html</div>
 			<div class=\"footer_filter\">$filter_html</div>
-			<div class=\"footer_left\">$older_html</div>
+			<div class=\"footer_left\">$newer_html</div>
 			<div class=\"clear\"></div>
 		</div>\n";
 	
