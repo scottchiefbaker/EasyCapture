@@ -1,6 +1,6 @@
 // If you capture a bunch of similar files and want to quick categorize them add each "type" to the array
 // This will allow you to quick categorize (rename) your files by name
-var rename_words = new Array('pussy','redhead','cumshot','creampie','panties');
+var rename_words = new Array();
 	
 $(document).ready(function() {
 	if (rename_words.length > 0) {
