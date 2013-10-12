@@ -224,10 +224,12 @@ class ec_page {
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
 		$out .= "<form method=\"get\" action=\"$PHP_SELF\" style=\"text-align: center; border: 0px solid; margin-bottom: 10px; display: none;\" id=\"form\">
-		<input type=\"text\" size=\"30\" name=\"old_name_text\" value=\"old_name.jpg\" id=\"old_name_text\" disabled=\"disabled\" />
+		<!--
+		-->
+		<input type=\"text\" size=\"50\" name=\"old_name_text\" value=\"old_name.jpg\" id=\"old_name_text\" disabled=\"disabled\" />
 		<input type=\"hidden\" size=\"30\" name=\"old_name\" value=\"old_name.jpg\" id=\"old_name\" />
-		-&gt;	
-		<input type=\"text\" size=\"30\" name=\"new_name\" value=\"new_name.jpg\" id=\"new_name\" />
+		rename to
+		<input type=\"text\" size=\"50\" name=\"new_name\" value=\"new_name.jpg\" id=\"new_name\" />
 		<input type=\"hidden\" size=\"30\" name=\"show\" value=\"gallery\" />
 		<input type=\"submit\" id=\"rename_button\" value=\"Rename\" onclick=\"javascript: return final_submit();\" />
 		<span id=\"placeholder\"></span>
@@ -595,7 +597,7 @@ class ec_page {
 		$file_contents = @join("",file($url));
 		if (!$file_contents) { $this->error("Could not download that file '$url'"); }
 
-		$filesize = (strlen($file_contents) / 1024);
+		$filesize = strlen($file_contents);
 		$filesize = $this->human_filesize($filesize);
 
 		$img = @imagecreatefromstring($file_contents);
@@ -607,6 +609,10 @@ class ec_page {
 		$full_thumb_path = "$thumb_dir/$thumb_filename";
 		
 		if ($this->debug) { print "Writing file to disk: <b>$full_path</b><br />\n"; }
+
+		if (!is_writable($full_path)) {
+			$this->error("Unable to write <span style=\"color: darkred\">$full_path</span>, permission denied");
+		}
 		
 		$fp = fopen($full_path,"w");
 		$bytes = intval(fwrite($fp,$file_contents));
