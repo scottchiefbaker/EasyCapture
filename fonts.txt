@@ -1,0 +1,9 @@
+The font I've chosen for the information link at the bottom
+of each image (dimensions and filesize) is emblem.ttf. I 
+believe this font is free and thus it is ok for me to include
+in my distribution. It was obtained from:
+
+http://www.1001freefonts.com/
+
+Scott Baker
+2009-11-23
