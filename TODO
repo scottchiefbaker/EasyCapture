@@ -1,0 +1,6 @@
+x Toggle status line
+x Delete/Rename permissions
+x Make show images show all images that are captured (multi)
+x Make FreeType optional (no image info without freetype)
+x Don't overwrite a file without a confirmation
+Allow capture of filenames with multiple periods (foo.bar.foo.jpg)

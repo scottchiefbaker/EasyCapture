@@ -1,0 +1,10 @@
+2009-01-12 - 0.5
+* Added the option to delete a file right after you capture it (like if something went wrong)
+* Fixed the "newer" link
+* Added the option on the main page to capture an image based on a URL
+
+2005-08-02 - O.41
+* Added login windows at the top to allow logging in much easier
+* Polished the CSS so the display is better in all browsers
+* Fixed a bug where capturing an image without an extension would confuse EC
+* Overall usability is up dramatically

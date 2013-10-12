@@ -1,0 +1,134 @@
+.image { 
+	float: left; 
+	margin: 0 10px 15px 0; 
+	width: 200px; 
+	text-align: center; 
+	height: 250px; 
+	font-size: 0.7em; 
+	font-family: sans-serif; 
+	border: 0px solid; 
+}
+
+h2 { margin: 10px 0px 10px 0px; }
+
+.gallery_header {
+	font-size: 1.5em;
+	text-align: center;
+	margin: 0px;
+	border: 0px solid;
+}
+
+body {
+	font-family: sans-serif;
+	margin: 0px;
+}
+
+.warning {
+	font-size: 0.8em;
+	color: red;
+	text-align: center;
+}
+
+.small_text {
+	font-size: 0.75em;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.medium_header {
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: center;
+}
+
+.large_header {
+	font-size: 2.0em;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 0px;
+	border: 0px solid red;
+}
+
+.back_to_menu {
+	font-size: 0.7em;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.file_size {
+	font-size: 0.8em;
+	margin-bottom: 4px;
+	font-weight: bold;
+}
+
+.max_file_size {
+	font-size: 0.6em;
+	font-weight: bold;
+}
+
+.login_text {
+	color: #1e7200;
+	font-size: 0.6em;
+	font-weight: bold;
+}
+
+.login_panel {
+	border-bottom: 1px solid black;
+	margin-left: 0px;
+	padding: 2px;
+	font-size: 0.7em;
+	background-color: #fffee8;
+}
+
+.main_body { margin-left: 5px; }
+
+#login_user, #login_pass, #login_button { 
+	border: 1px solid black; 
+	font-size: 0.8em;
+}
+
+.gallery_footer {
+	clear: both;
+	border-top: 1px solid black;
+	padding: 2px 3px 2px 3px;
+	font-size: 0.7em;
+	background-color: #fffee8;
+}
+
+.footer_left {
+	width: 33%;
+	float: left;
+	text-align: right;
+}
+
+.footer_right {
+	width: 34%;
+	float: left;
+	text-align: left;
+}
+
+.footer_filter {
+	width: 33%;
+	float: left;
+	text-align: center;
+}
+
+.footer_input {
+	border: 1px solid black; 
+	font-size: 0.8em;
+	width: 75%;
+}
+
+.login_form {
+	display: inline;
+	border: 0px solid black;
+}
+
+.clear {
+	clear: both;
+}
+
+.keyword_selected {
+	font-weight: bold;
+	background-color: #ECF8E0;
+}

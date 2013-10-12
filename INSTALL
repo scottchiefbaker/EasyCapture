@@ -1,0 +1,48 @@
+** Easy Capture **
+
+Uhhhhhhhhhhhhhhh there is no install really required for this software.
+If you're got this far you're pretty much done, I mean you had to untar
+the archive to read this so you're probably already done. Just make 
+sure you put these files in a PHP enabled directory and point your 
+browser to that location. Probably a good idea to extract with:
+tar xvzfp easy_capture.x.x.tar.gz so that the permissions get setup
+correctly. Otherwise just make sure your images and images/thumbs 
+directories are writable by the user your HTTP server runs as.
+
+EasyCapture requires PHP 4.x+, GD. EasyCapture has some additional 
+capabilities if you have freetype installed, I recommend installing it
+if you have the option. If you don't have a GD enabled PHP EasyCapture 
+will detect that and give you an error. If you don't have PHP 4.x+... 
+well you'll know because you'll get all kinds of code warnings.
+
+At minimum you'll need to configure PHP: "--with-gd" and probably 
+"--with-freetype" as well to make sure PHP has the libraries EasyCapture 
+uses.
+
+After you have extracted the files if you navigate to the directory you
+installed in your web browser you should be prompted with some choices:
+
+1) Bookmarklet: Drag this bookmarklet to your browsers toolbar and 
+   click on it on any page with an image you want to capture. It will
+	show all the available images on that page. Click on the one you 
+	want and your web server will copy that image and create a thumbnail
+	for you.
+
+2) Gallery: This shows all the images that you've captured so far. 
+   You can view the larger (fullsize) images by clicking on each 
+	thumbnail. View the HTML you'll need to embed the thumbnail on
+	your homepage, LiveJournal, or EBay. Delete and Rename are pretty
+	explanatory.
+
+3) Capture: This allows you to upload images to your EasyCapture 
+   gallery (a maximum of five at a time) from your local computer.
+
+That's it! I designed EasyCapture to be very simple and straight 
+forward. If you have any questions drop me an email.
+
+Scott Baker - scott@perturb.org
+2005/06/26
+
+P.S. Download and install Firefox, it's the best browser out there!
+P.P.S If you're looking for some images to capture check out:
+      http://www.perturb.org/lj_images.php
