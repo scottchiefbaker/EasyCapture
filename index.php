@@ -53,8 +53,12 @@ if ($check) {
 	$_SESSION['password'] = $_POST['password'];
 }
 
+if ($_FILES['file']['size']) {
+	$total_upload_size = @array_sum($_FILES['file']['size']);
+}
+
 // Check to see if a file was uploaded from the local PC
-if (sizeof($_FILES)) {
+if ($total_upload_size > 0) {
 	$url = $ec->process_files();
 	if (!$url) { 
 		//print_r($_FILES);
@@ -85,6 +89,9 @@ if ($action == "add_tag") {
 } elseif ($action == "remove_tag") {
 	$ec->remove_tag($filename);
 	header("Location: $PHP_SELF?show=$filename");
+} elseif ($action == "resample") {
+	$ec->resample($filename);
+	$show = $filename;
 } elseif ($action) {
 	$ec->error("Unknown action '$action'");
 }
@@ -151,9 +158,11 @@ if (!$img_info) {
 
 	$show_count = 1;
 	for ($i = 0; $i < $show_count; $i++) {
-		$filet .= "<input type=\"file\" name=\"file[]\" size=\"40\" /><br />\n";
+		$filet .= "<input type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" /><br />\n";
 		$urlt  .= "<input type=\"text\" name=\"url[]\" size=\"40\" /><br />\n";
 	}
+
+	//$filet .= "<input type=\"file\" multiple=\"true\" id=\"file_temp\" name=\"file_temp\" size=\"40\" /><br />\n";
 
 	if (($ec->auth_capture && $ec->valid_admin_login()) || !$ec->auth_capture) {
 		$output .= "<div class=\"small_text\">Image Upload:</div>
