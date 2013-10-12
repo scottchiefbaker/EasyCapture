@@ -17,7 +17,7 @@ class ec_page {
 	}
 
 	function html($html) {
-		$content = join("",file('xhtml-template.html'));
+		$content = join("",file('html-template.html'));
 
 		if (!$this->valid_admin_login()) {
 			$login_bar = $this->login_bar();
