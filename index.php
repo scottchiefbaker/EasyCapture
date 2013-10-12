@@ -90,8 +90,9 @@ if ($action == "add_tag") {
 	$ec->remove_tag($filename);
 	header("Location: $PHP_SELF?show=$filename");
 } elseif ($action == "resample") {
-	$ec->resample($filename);
-	$show = $filename;
+	$ec->resample($ec->full_dir . "/" .$filename,85);
+	#$show = $filename;
+	$show = "gallery";
 } elseif ($action) {
 	$ec->error("Unknown action '$action'");
 }
