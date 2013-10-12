@@ -3,7 +3,7 @@ class ec_page {
 
 	//  function __construct() {
 	function ec_page() {
-		$this->version = "0.5";
+		$this->version = "0.54";
 		$this->auth_delete = 1;
 		$this->auth_rename = 1;
 		$this->auth_capture = 0;
@@ -247,6 +247,7 @@ class ec_page {
 			if ($this->authorized("rename")) {
 				$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
 			}
+			$footer .= " | <a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
 
 			//print_r($files_to_show);
 			//print "$filename<br />";
@@ -513,7 +514,6 @@ class ec_page {
 
 				if ($this->valid_admin_login()) { 
 					$raw_html .= "\n\t<div style=\"margin-bottom: 10px; font-size: 0.7em;\">Info Tag: <a href=\"$add_link\">On</a>/<a href=\"$remove_link\">Off</a></div>$del_link\n\n";
-					$raw_html .= "<a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
 				} else {
 					$raw_html = "<br />";
 				}
@@ -596,8 +596,8 @@ class ec_page {
 		if (!$file_contents) { $this->error("Could not download that file '$url'"); }
 
 		$filesize = (strlen($file_contents) / 1024);
-		$filesize = sprintf("%.1f",$filesize) . "k";
-		
+		$filesize = $this->human_filesize($filesize);
+
 		$img = @imagecreatefromstring($file_contents);
 		if (!$img) { $this->error("Something went wrong trying to capture <b>$filename</b>"); }
 		
@@ -1241,9 +1241,37 @@ class ec_page {
 		return $ret;
 	}
 
+	function human_filesize($bytes) {
+		$filesize = sprintf("%.1f",$bytes / 1024) . "k";
+
+		return $filesize;
+	}
+
 	function resample($file,$quality = 85) {
-		#print "Resample: $file $quality";
-		# Stub for now!
+		// Get the actual file
+		$data  = file_get_contents($file);
+		$image = imagecreatefromstring($data);	
+
+		// Create the new filename
+		$parts = pathinfo($file);
+		$out_file = $this->full_dir . "/" . $parts['filename'] . "-resampled.jpg";
+
+		// Save the newly created jpeg
+		$ok = imageJpeg($image,$out_file,$quality);
+		if (!$ok) {
+			$this->error("Error resampling image");
+		}
+		$bytes = filesize($out_file);
+
+		// Make the thumbnail
+		$thumb = $this->create_thumbnail($image,$this->human_filesize($bytes));
+		$thumb_path = $this->thumb_dir . "/" . $parts['filename'] . "-resampled.jpg";
+
+		if ($thumb) {
+			imagejpeg($thumb,$thumb_path,$this->jpeg_quality);
+		}
+
+		return $bytes;
 	}
 }
 
