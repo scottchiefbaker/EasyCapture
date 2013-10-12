@@ -108,6 +108,8 @@ class ec_page {
 			$binaries = array();
 		}
 
+		$list = array();
+
 		// These two foreach statements makes sure we're not adding the . and .. dirs
 		foreach ($binaries as &$file) {
 			if (is_readable($file) && !is_dir($file)) {
