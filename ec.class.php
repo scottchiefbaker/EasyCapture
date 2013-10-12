@@ -613,7 +613,7 @@ class ec_page {
 		
 		if ($this->debug) { print "Writing file to disk: <b>$full_path</b><br />\n"; }
 
-		if (!is_writable($full_path)) {
+		if (!is_writable(dirname($full_path))) {
 			$this->error("Unable to write <span style=\"color: darkred\">$full_path</span>, permission denied");
 		}
 		
