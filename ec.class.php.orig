@@ -239,10 +239,9 @@ class ec_page {
 
 		// This outputs what's in the $full array
 		foreach(array_keys($files_to_show) as $filename) { 
-			$footer = "<div class=\"image_footer\">";
-			$footer .= "<div class=\"image_actions\">";
+			#print "Checking $filename<br />";
 
-			$footer .= "\t<div class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
+			$footer = "\t<a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a><br />\n";
 
 			if ($this->authorized("delete")) {
 				$footer .= $this->get_delete_link($filename);
@@ -251,8 +250,6 @@ class ec_page {
 				$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
 			}
 			$footer .= " | <a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
-			$footer .= "</div>";
-			$footer .= "</div>";
 
 			//print_r($files_to_show);
 			//print "$filename<br />";

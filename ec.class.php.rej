@@ -1,0 +1,23 @@
+--- ec.class.php
++++ ec.class.php
+@@ -241,8 +241,10 @@
+                foreach(array_keys($files_to_show) as $filename) {
+                        #print "Checking $filename<br />";
+ 
+-                       $footer = "\t<a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a><br />\n";
++                       $footer = "<div class=\"image_footer\">";
++                       $footer .= "\t<div class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
+ 
++                       $footer .= "<div class=\"image_actions\">";
+                        if ($this->authorized("delete")) {
+                                $footer .= $this->get_delete_link($filename);
+                        }
+@@ -250,6 +252,8 @@
+                                $footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
+                        }
+                        $footer .= " | <a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
++                       $footer .= "</div>";
++                       $footer .= "</div>";
+ 
+                        //print_r($files_to_show);
+                        //print "$filename<br />";
