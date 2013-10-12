@@ -149,7 +149,7 @@ if (!$img_info) {
 	<br />
 	-->";
 
-	$show_count = 3;
+	$show_count = 1;
 	for ($i = 0; $i < $show_count; $i++) {
 		$filet .= "<input type=\"file\" name=\"file[]\" size=\"40\" /><br />\n";
 		$urlt  .= "<input type=\"text\" name=\"url[]\" size=\"40\" /><br />\n";
