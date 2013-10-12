@@ -753,13 +753,13 @@ class ec_page {
 			$this->error("Binary directory is not writeable<br />$this->binary_dir");
 		}
 
+		if (!function_exists("imagecopyresampled")) {
+			$this->error("Easy Captures requires the GD Library but it's not present in this PHP install.<br />Please install the <span style=\"color: darkred\">php-gd</span> module.");
+		}
+
 		#if (!function_exists('imagecreatefromjpeg')) {
 		if (!imagetypes() & IMG_JPG) {
 			$this->error("Easy Capture requires JPEG support, please enable JPEG support and try again. (--with-jpeg-dir)");
-		}
-
-		if (!function_exists("imagecopyresampled")) {
-			$this->error("Easy Captures requires the GD Library but it's not present in this PHP install.<br />Please recompile PHP with GD support (--with-gd)");
 		}
 
 		if (!function_exists("imagettftext")) {
