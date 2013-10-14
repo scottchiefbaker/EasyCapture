@@ -1,4 +1,5 @@
 <?PHP
+#error_reporting(E_ALL);
 
 require('ec.class.php');
 
@@ -41,20 +42,20 @@ $ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"
 $ec->script[] = "js/jquery.js"; // Jquery must come first
 $ec->script[] = "js/functions.js";
 
-$check = $_GET['check'];
-if ($check) {
+if (isset($_GET['check'])) {
 	$html = $ec->check_files();
 	$ec->html($html);
 	exit;
-} elseif ($_GET['login']) {
+} elseif (isset($_GET['login'])) {
 	$ec->show_admin_login();
-} elseif ($_POST['username'] && $_POST['password']) {
+} elseif (isset($_POST['username']) && isset($_POST['password'])) {
 	$_SESSION['username'] = $_POST['username'];
 	$_SESSION['password'] = $_POST['password'];
 }
 
-if ($_FILES['file']['size']) {
-	$total_upload_size = @array_sum($_FILES['file']['size']);
+$total_upload_size = 0;
+if (isset($_FILES['file']['size'])) {
+	$total_upload_size = array_sum($_FILES['file']['size']);
 }
 
 // Check to see if a file was uploaded from the local PC
@@ -67,7 +68,7 @@ if ($total_upload_size > 0) {
 // Check to see if a URL was sent in via POST
 } else {
 	//print_r($_POST); print_r($_GET);
-	if ($url = $_POST['url']) {
+	if (isset($_POST['url']) && ($url = $_POST['url'])) {
 		// If URL is set, and it's NOT an array make it an array
 		if (!is_array($url)) {
 			$url = array($_POST['url']);
@@ -77,10 +78,10 @@ if ($total_upload_size > 0) {
 	}
 } 
 
-$show = $_GET['show'];
-$action = $_GET['action'];
-$filename = $_GET['filename'];
-$PHP_SELF = $_SERVER['PHP_SELF'];
+$show     = var_set($_GET['show']);
+$action   = var_set($_GET['action']);
+$filename = var_set($_GET['filename']);
+$PHP_SELF = var_set($_SERVER['PHP_SELF']);
 
 // Check to see if they're removing/adding the info tag
 if ($action == "add_tag") {
@@ -115,16 +116,17 @@ $img_info = "";
 if ($url) {
 
 	// This code checks for tar.gz and extracts them, and adds the files to the process queue
+	$files = array();
 	foreach ($url as $url_item) {
 		if (preg_match("/.tar.(gz|bz2)$/",$url_item)) {
 			$files_from_tar = $ec->get_tar_list($url_item,1);
 
 			foreach ($ec->extract_tar_file($url_item,"/tmp/",$files_from_tar) as $url_item) {
 				//print "$url_item<br />\n";
-				$files[$url_item]++;
+				$files[$url_item] = 1;
 			}
 		} else {
-			$files[$url_item]++;
+			$files[$url_item] = 1;
 		}
 	}
 
@@ -135,7 +137,7 @@ if ($url) {
 
 if (!$img_info) { 
 	$PHP_SELF = $_SERVER['PHP_SELF'];
-	$output .= "<h2>Easy Capture $ec->version</h2>";
+	$output = "<h2>Easy Capture $ec->version</h2>";
 
 	if ($_SERVER["HTTPS"]) { $http = "https://"; }
 	else { $http = "http://"; }
@@ -159,8 +161,8 @@ if (!$img_info) {
 
 	$show_count = 1;
 	for ($i = 0; $i < $show_count; $i++) {
-		$filet .= "<input type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" /><br />\n";
-		$urlt  .= "<input type=\"text\" name=\"url[]\" size=\"40\" /><br />\n";
+		$filet = "<input type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" /><br />\n";
+		$urlt  = "<input type=\"text\" name=\"url[]\" size=\"40\" /><br />\n";
 	}
 
 	//$filet .= "<input type=\"file\" multiple=\"true\" id=\"file_temp\" name=\"file_temp\" size=\"40\" /><br />\n";
@@ -190,7 +192,7 @@ if (!$img_info) {
 } else {
 	//print_r($img_info);
 
-	$html .= "<h2 style=\"text-align: center;\"><a href=\"$PHP_SELF?show=gallery\">Show all gallery images</a></h2>\n\n";
+	$html = "<h2 style=\"text-align: center;\"><a href=\"$PHP_SELF?show=gallery\">Show all gallery images</a></h2>\n\n";
 	foreach ($img_info as $info) {
 		if (!$info) { continue; }
 

@@ -1,13 +1,24 @@
 <?PHP
+
+function var_set(&$value, $default = null) {
+	if (isset($value)) {
+		return $value;
+	} else {
+		return $default;
+	}
+}
+
 class ec_page {
 
 	//  function __construct() {
 	function ec_page() {
-		$this->version = "0.54";
+		$this->version = "0.5.5";
 		$this->auth_delete = 1;
 		$this->auth_rename = 1;
 		$this->auth_capture = 0;
 		$this->debug = 1;
+
+		$this->footer = "";
 
 		umask(0133);
 
@@ -21,28 +32,33 @@ class ec_page {
 
 		if (!$this->valid_admin_login()) {
 			$login_bar = $this->login_bar();
+		} else {
+			$login_bar = "";
 		}
 	
 		#$style = $this->default_style();
 		$script = $this->script;
 		if (!is_array($script)) { $script = array($script); }
-		$body .= $html;
+		$body = $html;
 
 		#$body = preg_replace("/&/","&amp;",$body);
 
-		if ($this->warning) {
+		if (isset($this->warning)) {
 			$body = "<div class=\"warning\"><b>Warning:</b> $this->warning</div>\n\n" . $body;
 		}
 
-		if ($this->information) {
+		if (isset($this->information)) {
 			$body = "<div class=\"information\">$this->information</div>\n\n" . $body;
 		}
 
+		$script_html = "";
 		foreach ($script as $file) {
 			$script_html .= "<script type=\"text/javascript\" src=\"$file\"></script>\n";
 		}
 
-		$content = preg_replace("/\{style\}/",$style,$content);
+		if (isset($style)) {
+			$content = preg_replace("/\{style\}/",$style,$content);
+		}
 		$content = preg_replace("/\{script\}/",$script_html,$content);
 		$content = preg_replace("/\{header\}/",$login_bar,$content);
 		$content = preg_replace("/\{footer\}/",$this->footer,$content);
@@ -151,6 +167,8 @@ class ec_page {
 		$sorted = $for_sorting;
 
 		// Filter out what's not needed after the filter and the limits etc...
+		$count       = 0;
+		$shown_count = 0;
 		foreach ($sorted as $filename) {
 			$count++;
 		
@@ -170,19 +188,19 @@ class ec_page {
 	}
 
 	 function show_gallery() {
-		$full_html_dir = $this->full_dir;
+		$full_html_dir  = $this->full_dir;
 		$thumb_html_dir = $this->thumb_dir;
-		$start = microtime(1);
+		$start          = microtime(1);
 
-		$offset = intval($_GET['offset']);
-		$limit = $_GET['limit'];
-		$filter = $_GET['filter'];
+		$offset = intval(var_set($_GET['offset']));
+		$limit  = var_set($_GET['limit']);
+		$filter = var_set($_GET['filter']);
 
 		$limit || $limit = 30;
 
-		if ($_GET['delete']) { 
+		if (var_set($_GET['delete'])) { 
 			$this->delete_file($_GET['delete']); 
-		} elseif ($_GET['old_name'] && $_GET['new_name']) {
+		} elseif (isset($_GET['old_name']) && isset($_GET['new_name'])) {
 			$this->rename_file($_GET['old_name'],$_GET['new_name']);
 		}
 
@@ -199,20 +217,21 @@ class ec_page {
 			}
 
 			// Calc the size for each file (in bytes)
+			$size = 0;
 			foreach ($info as $file) {
 				$size += filesize($file);
 			}
 
 			// Convert bytes to megs
-			$size = $size / (1024 * 1024);
-			$size = sprintf("%.02f",$size);
+			$size  = $size / (1024 * 1024);
+			$size  = sprintf("%.02f",$size);
 			$total = sizeof($info); // number of files in the dir
 
 			$stats = "$total files - {$size} megs - ";
 		}
 
 		$version = $this->version;
-		$out .= "<h2 class=\"gallery_header\">Easy Capture Version $version</h2>\n\n";
+		$out  = "<h2 class=\"gallery_header\">Easy Capture Version $version</h2>\n\n";
 		$out .= "<div class=\"back_to_menu\">$stats(<a href=\"index.php\">Back to Menu</a>)</div>\n\n";
 
 		$files_to_show = $this->get_files($offset,$limit,$filter);
@@ -238,6 +257,7 @@ class ec_page {
 		#print join("<br />",$full) . "<br />;
 
 		// This outputs what's in the $full array
+		$shown_images = 0;
 		foreach(array_keys($files_to_show) as $filename) { 
 			$footer = "<div class=\"image_footer\">";
 			$footer .= "<div class=\"image_actions\">";
@@ -258,7 +278,7 @@ class ec_page {
 			//print "$filename<br />";
 
 			// Is a binary
-			if ($files_to_show[$filename]['binary_size']) {
+			if (isset($files_to_show[$filename]['binary_size'])) {
 				$path = $this->clean_url($files_to_show[$filename]['thumb_html_path']);
 				$link_path = $this->clean_url($this->binary_dir . "/" . $filename);
 
@@ -276,7 +296,7 @@ class ec_page {
 				$out .= "<div class=\"image\">\n\t<a href=\"$link_path\"><img src=\"binary-icon.png\" style=\"border: 0px solid green;\" alt=\"$filename\" /></a>\n\t<br />\n$footer\n</div>\n\n";
 
 			// Has thumbnail
-			} elseif ($files_to_show[$filename]['thumb_html_path']) {
+			} elseif (isset($files_to_show[$filename]['thumb_html_path'])) {
 	
 				//$path = $this->clean_url($thumb_html_dir . "/" . $filename);
 				$path = $this->clean_url($files_to_show[$filename]['thumb_html_path']);
@@ -302,9 +322,9 @@ class ec_page {
 		if ($shown_images >= $limit) {
 			$new_offset = $offset + $limit;
 			$older_link = "$PHP_SELF?show=gallery&amp;offset=$new_offset";
-			$older_html .= "<a href=\"$older_link\">Older</a>\n";
+			$older_html = "<a href=\"$older_link\">Older</a>\n";
 		} else {
-			$older_html .= "Older\n";
+			$older_html = "Older\n";
 		}
 
 		// Setup the new offset link
@@ -446,27 +466,25 @@ class ec_page {
 	}
 
 	 function show_image($file_list,$show_all_link = 1) {
-		//print_r($file_list);
-
 		if (!$file_list) { $this->error("No files sent to show_image"); }
 
 		if (!is_array($file_list)) {
-			$filename = $file_list;
-			$file_list = "";
+			$filename    = $file_list;
+			$file_list   = "";
 			$file_list[] = $filename;
 		}
-
-		// print_r($file_list);
 
 		foreach ($file_list as $filename) {
 			$img_list[] = $this->get_file_info($filename);
 		}
 
+		$head = "";
 		if ($show_all_link) { 
-			$head .= "<h2 style=\"text-align: center;\"><a href=\"$PHP_SELF?show=gallery\">Show all gallery images</a></h2>\n\n"; 
+			$head = "<h2 style=\"text-align: center;\"><a href=\"" . $_SERVER['PHP_SELF'] . "?show=gallery\">Show all gallery images</a></h2>\n\n"; 
 		}
 
-		$head .= "<div style=\"text-align: center;\">\n\n";
+		$head     .= "<div style=\"text-align: center;\">\n\n";
+		$raw_html  = "";
 	
 		foreach ($img_list as $img_info) {
 			// Is a directory
@@ -475,40 +493,38 @@ class ec_page {
 			else  { $directory = dirname($_SERVER['REQUEST_URI']) . "/" ; }
 
 			$server_name = "http://" . $_SERVER['SERVER_NAME'] . $directory;
-			//$server_name = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
-			$html_path = $server_name . $img_info['full_html_path'];
-			$filename = basename($html_path);
-
-			$thumb_html_path = $img_info['thumb_html_path'];
-			$filename = $img_info['filename'];
-			$filesize = number_format($img_info['binary_size']);
-			$u_filename = urlencode($img_info['filename']);
+			$html_path       = $server_name . $img_info['full_html_path'];
+			$filename        = basename($html_path);
+			$thumb_html_path = var_set($img_info['thumb_html_path']);
+			$filename        = $img_info['filename'];
+			$u_filename      = urlencode($img_info['filename']);
 	
 			// Binary file
-			if ($img_info['binary_size']) {
-				$path = dirname($img_info['binary_html_path']);
-				$filename = basename($img_info['binary_html_path']);
+			if (isset($img_info['binary_size'])) {
+				$path      = dirname($img_info['binary_html_path']);
+				$filesize  = number_format($img_info['binary_size']);
+				$filename  = basename($img_info['binary_html_path']);
 				$file_link = $this->clean_url($server_name . $path . "/" . urlencode($filename),1);
-			
-				$img_html .= "<div style=\"margin-bottom: 10px;\">\n\t<a href=\"$file_link\"><img src=\"binary-icon.png\" style=\"border: 0px solid;\" alt=\"$filename\" /></a>\n</div>\n<div class=\"file_size\">$filename - $filesize bytes</div>\n\n";
+	
+				$img_html = "<div style=\"margin-bottom: 10px;\">\n\t<a href=\"$file_link\"><img src=\"binary-icon.png\" style=\"border: 0px solid;\" alt=\"$filename\" /></a>\n</div>\n<div class=\"file_size\">$filename - $filesize bytes</div>\n\n";
 			// No thumbnail
 			} elseif (!$thumb_html_path) { 
 				$thumb_html_path = $server_name . "/" . $img_info['full_html_path'];
 				$thumb_html_path = $this->clean_url($thumb_html_path,1);
 			
-				$img_html .= "<div style=\"margin-bottom: 10px;\">\n\t<img src=\"$thumb_html_path\" style=\"border: 0px solid;\" alt=\"$filename\" />\n</div>\n\n";
+				$img_html        = "<div style=\"margin-bottom: 10px;\">\n\t<img src=\"$thumb_html_path\" style=\"border: 0px solid;\" alt=\"$filename\" />\n</div>\n\n";
 			// It has a thumbnail
 			} else {
 				$thumb_html_path = $server_name . $thumb_html_path;
 				$thumb_html_path = $this->clean_url($thumb_html_path,1);
-				$html_path = $this->clean_url($html_path,1);
+				$html_path       = $this->clean_url($html_path,1);
 
-				$img_html .= "<div style=\"margin-bottom: 0px;\">\n\t<a href=\"$html_path\"><img src=\"$thumb_html_path\" style=\"border: 1px solid;\" alt=\"$filename\" /></a>\n</div>\n\n";
+				$img_html = "<div style=\"margin-bottom: 0px;\">\n\t<a href=\"$html_path\"><img src=\"$thumb_html_path\" style=\"border: 1px solid;\" alt=\"$filename\" /></a>\n</div>\n\n";
 			}
 
 			//print "<div><img src=\"$html_path\"><br />$filename</div>\n";
-			if ($this->freetype && $img_info['thumb_html_path'] ) {
+			if ($this->freetype && isset($img_info['thumb_html_path'])) {
 				$PHP_SELF = $_SERVER['PHP_SELF'];
 				$remove_link = "$PHP_SELF?action=remove_tag&filename=$filename";
 				$add_link = "$PHP_SELF?action=add_tag&filename=$filename";
@@ -518,7 +534,7 @@ class ec_page {
 				}
 
 				if ($this->valid_admin_login()) { 
-					$raw_html .= "\n\t<div style=\"margin-bottom: 10px; font-size: 0.7em;\">Info Tag: <a href=\"$add_link\">On</a>/<a href=\"$remove_link\">Off</a></div>$del_link\n\n";
+					$raw_html = "\n\t<div style=\"margin-bottom: 10px; font-size: 0.7em;\">Info Tag: <a href=\"$add_link\">On</a>/<a href=\"$remove_link\">Off</a></div>$del_link\n\n";
 				} else {
 					$raw_html = "<br />";
 				}
@@ -549,19 +565,18 @@ class ec_page {
 			$this->error("You are not allowed to capture images<br />Please <a href=\"$PHP_SELF?login=1\">login</a> first"); 
 		}
 	
-		$full_dir = $this->full_dir;
-		$thumb_dir = $this->thumb_dir;
-	
-		$full_html_dir = $full_dir;
+		$full_dir       = $this->full_dir;
+		$thumb_dir      = $this->thumb_dir;
+		$full_html_dir  = $full_dir;
 		$thumb_html_dir = $thumb_dir;
 	
 		#$filename = str_replace("%20","_",basename($url));
 		$filename = urldecode(basename($url));
 
 		// If it's an image name that already exists ask for overwrite
-		$info = $this->get_file_info($filename);
-		$confirm = $_POST['confirm'];
-		$action = $_GET['action'];
+		$info    = $this->get_file_info($filename);
+		$confirm = var_set($_POST['confirm']);
+		$action  = var_set($_GET['action']);
 
 		// If it's an action (add/remove info tag) auto confirm
 		if ($action) { $confirm = 1; }
@@ -663,6 +678,7 @@ class ec_page {
 		}
 
 		if (!$filename) { $this->error("No file to delete"); }
+		$out = "";
 	
 		// If there is a thumb we need to figure out where it is so we can delete it
 		$info = $this->get_file_info($filename);
@@ -679,7 +695,7 @@ class ec_page {
 				$out .= "Info: Deleted fullsize <b>$filename</b><br />\n";
 			}
 
-			if ($thumb_file) {
+			if (isset($thumb_file)) {
 				unlink($thumb_file);
 				$out .= "Info: Deleted thumbnail <b>$filename</b><br />\n";
 			}
@@ -1183,8 +1199,8 @@ class ec_page {
 	}
 
 	function valid_admin_login($error_out = 1) {
-		$un = $_SESSION['username'];
-		$pwd = $_SESSION['password'];
+		$un  = var_set($_SESSION['username']);
+		$pwd = var_set($_SESSION['password']);
 
 		static $pert;
 
@@ -1223,13 +1239,13 @@ class ec_page {
 	}
 
 	function login_bar() {
-		if ($_POST['username'] || $_POST['password']) {
+		if (isset($_POST['username']) || isset($_POST['password'])) {
 			$style = "background-color: #ff5353;";
 		}
 
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 	
-		$ret .= "<div class=\"login_panel\" style=\"$style\">
+		$ret = "<div class=\"login_panel\">
 	<form method=\"post\" class=\"login_form\" action=\"$PHP_SELF\">
 		<b>Login:</b> 
 		<label>Username:</label> <input type=\"text\" name=\"username\" id=\"login_user\" />  
