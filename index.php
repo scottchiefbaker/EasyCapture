@@ -28,8 +28,8 @@ $ec->auth_rename = 1;
 $ec->auth_capture = 0;
 
 // Set the username and password required to login
-$ec->admin_username = "aaa";
-$ec->admin_password = "bbb";
+$ec->admin_username = "";
+$ec->admin_password = "";
 
 /////////////////////////////////////////////////////////////////////////////////
 // No more user editable settings past this point!!!

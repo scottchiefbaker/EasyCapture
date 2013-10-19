@@ -12,7 +12,7 @@ class ec_page {
 
 	//  function __construct() {
 	function ec_page() {
-		$this->version = "0.5.5";
+		$this->version = "0.5.6";
 		$this->auth_delete = 1;
 		$this->auth_rename = 1;
 		$this->auth_capture = 0;
@@ -559,6 +559,9 @@ class ec_page {
 	function capture_image($url) {
 		if (!$url) { return 0; }
 		if ($this->debug) { print "You want to capture: <b>$url</b><br />\n"; }
+
+		// Remove anything after a ? like foo.jpg?name=bar&baz=whatever
+		$url = preg_replace("/\\?.+/","",$url);
 
 		if (!$this->authorized('capture')) { 
 			$PHP_SELF = $_SERVER['PHP_SELF'];
