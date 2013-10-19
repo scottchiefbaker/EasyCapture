@@ -39,7 +39,10 @@ $ec->sanity_check();
 
 $ec->title = "Easy Capture";
 $ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/style.css\" title=\"Default\" />";
-$ec->script[] = "js/jquery.js"; // Jquery must come first
+
+// This lets us upgrade JQuery versions without having to update HTML
+$glob = glob("js/jquery*min.js");
+$ec->script[] = $glob[0]; // Jquery must come first
 $ec->script[] = "js/functions.js";
 
 if (isset($_GET['check'])) {
