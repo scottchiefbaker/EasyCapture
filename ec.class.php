@@ -30,7 +30,7 @@ class ec_page {
 	function html($html) {
 		$content = join("",file('html-template.html'));
 
-		if (!$this->valid_admin_login()) {
+		if (!$this->valid_admin_login(0)) {
 			$login_bar = $this->login_bar();
 		} else {
 			$login_bar = "";
@@ -533,7 +533,7 @@ class ec_page {
 					$del_link = $this->get_delete_link($filename,"Delete this file");
 				}
 
-				if ($this->valid_admin_login()) { 
+				if ($this->valid_admin_login(0)) { 
 					$raw_html = "\n\t<div style=\"margin-bottom: 10px; font-size: 0.7em;\">Info Tag: <a href=\"$add_link\">On</a>/<a href=\"$remove_link\">Off</a></div>$del_link\n\n";
 				} else {
 					$raw_html = "<br />";
@@ -815,9 +815,9 @@ class ec_page {
 		#$valid_login = $this->valid_admin_login(0);
 
 		// Check if auth is required, if it is check for a valid login
-		if ($this->auth_delete && ($action == "delete" && !$this->valid_admin_login(1))) { return 0; }
-		elseif ($this->auth_rename && ($action == "rename" && !$this->valid_admin_login(1))) { return 0; }
-		elseif ($this->auth_capture && ($action == "capture" && !$this->valid_admin_login(1))) { return 0; }
+		if ($this->auth_delete && ($action == "delete" && !$this->valid_admin_login(0))) { return 0; }
+		elseif ($this->auth_rename && ($action == "rename" && !$this->valid_admin_login(0))) { return 0; }
+		elseif ($this->auth_capture && ($action == "capture" && !$this->valid_admin_login(0))) { return 0; }
 		else { return 1; }
 	}
 
