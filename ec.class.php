@@ -777,11 +777,13 @@ class ec_page {
 		}
 
 		if (!is_writeable($this->thumb_dir)) { 
-			$this->error("Thumbnail directory in not writeable<br />$this->thumb_dir");
+			$path = realpath($this->thumb_dir);
+			$this->error("Thumbnail directory in not writeable<br /><code>chmod a+w $path</code>");
 		}
 
 		if (!is_writeable($this->full_dir)) {
-			$this->error("Full size directory is not writeable<br />$this->full_dir");
+			$path = realpath($this->full_dir);
+			$this->error("Full size directory is not writeable<br /><code>chmod a+w $path</code>");
 		}
 
 		if ($this->enable_binary_capture && !is_writeable($this->binary_dir)) {
