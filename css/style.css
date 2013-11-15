@@ -33,6 +33,15 @@ body {
 	text-align: center;
 }
 
+.config_warning {
+	background-color: #FFC280;
+	padding: 4px;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin: 5px;
+	text-align: center;
+}
+
 .small_text {
 	font-size: 0.75em;
 	font-weight: bold;
@@ -84,7 +93,7 @@ body {
 	background-color: #fffee8;
 }
 
-.main_body { margin-left: 5px; }
+.main_body { margin: 0 5px 0 5px; }
 
 #login_user, #login_pass, #login_button { 
 	border: 1px solid black; 

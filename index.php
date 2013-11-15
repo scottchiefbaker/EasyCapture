@@ -5,7 +5,14 @@ require('ec.class.php');
 $ec = new ec_page;
 
 // Load the config options
-require('config.php');
+if (is_readable('config.php')) {
+	require('config.php');
+
+	$ec->has_config = 1;
+} else {
+	$ec->set_defaults();
+	$ec->has_config = 0;
+}
 
 /////////////////////////////////////////////////////////////////////////////////
 // No more user editable settings past this point!!!
@@ -18,6 +25,7 @@ $ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"
 
 // This lets us upgrade JQuery versions without having to update HTML
 $glob = glob("js/jquery*min.js");
+
 $ec->script[] = $glob[0]; // Jquery must come first
 $ec->script[] = "js/functions.js";
 
@@ -115,10 +123,16 @@ if ($url) {
 }
 
 if (!$img_info) { 
-	$PHP_SELF = $_SERVER['PHP_SELF'];
-	$output = "<h2>Easy Capture $ec->version</h2>";
+	$output = "";
 
-	if ($_SERVER["HTTPS"]) { $http = "https://"; }
+	if (!$ec->has_config) {
+		$output .= "<div class=\"config_warning\" style=\"margin-top: 1em;\"><b>Warning:</b> config.php not found, using defaults instead.</div>\n\n";
+	}
+
+	$PHP_SELF  = $_SERVER['PHP_SELF'];
+	$output   .= "<h2>Easy Capture $ec->version</h2>";
+
+	if (isset($_SERVER["HTTPS"])) { $http = "https://"; }
 	else { $http = "http://"; }
 
 

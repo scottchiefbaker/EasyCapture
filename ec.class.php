@@ -1259,6 +1259,12 @@ class ec_page {
 	</form>
 </div>\n\n";
 
+		if ($this->has_config == 0) {
+			$ret = "";
+		} elseif (!$this->admin_username) {
+			$ret = "<div class=\"config_warning\" style=\"margin-top: 1em;\"><b>Warning:</b> admin_username not set in <b>config.php</b></div>";
+		}
+
 		return $ret;
 	}
 
@@ -1302,6 +1308,34 @@ class ec_page {
 		}
 
 		return $bytes;
+	}
+
+	function set_defaults() {
+		// Paths to the full and thumb directories. Must be writable by your HTTP server
+		$this->full_dir  = "images/";
+		$this->thumb_dir = "images/thumbs/";
+
+		// Quality to make the thumbnail JPEGs
+		$this->jpeg_quality = 75;
+
+		// Include the info tag in the thumbnails
+		$this->include_info_tag = 1;
+
+		// Allow EasyCapture to store binaries too?
+		$this->enable_binary_capture = 0;
+		$this->binary_dir = "binary/";
+
+		// Turn on all kinds of debug output
+		$this->debug = 0;
+
+		// Require auth for various functions
+		$this->auth_delete  = 1;
+		$this->auth_rename  = 1;
+		$this->auth_capture = 0;
+
+		// Set the username and password required to login
+		$this->admin_username = "";
+		$this->admin_password = "";
 	}
 }
 
