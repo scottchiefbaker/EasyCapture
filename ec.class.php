@@ -776,7 +776,7 @@ class ec_page {
 		}
 
 		if (!is_dir($this->full_dir)) { 
-			$this->error("Full size image directory does not exist<br />$this->full_dir");
+			$this->error("Image directory does not exist<br />$this->full_dir");
 		}
 
 		if (!is_writeable($this->thumb_dir)) { 
@@ -786,7 +786,7 @@ class ec_page {
 
 		if (!is_writeable($this->full_dir)) {
 			$path = realpath($this->full_dir);
-			$this->error("Full size directory is not writeable<br /><code>chmod a+w $path</code>");
+			$this->error("Image directory is not writeable<br /><code>chmod a+w $path</code>");
 		}
 
 		if ($this->enable_binary_capture && !is_writeable($this->binary_dir)) {
