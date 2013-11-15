@@ -1,5 +1,14 @@
 <?PHP
 
+////////////////////////////////////////////////////////////////////////
+// Sample EasyCapture configuration
+//
+// admin_username and admin_password are the only default settings
+// not set. The rest of the default should be "good enough".
+//
+// When done copy this file to config.php
+////////////////////////////////////////////////////////////////////////
+
 // Paths to the full and thumb directories. Must be writable by your HTTP server
 $ec->full_dir = "images/";
 $ec->thumb_dir = "images/thumbs/";
