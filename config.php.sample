@@ -1,0 +1,27 @@
+<?PHP
+
+// Paths to the full and thumb directories. Must be writable by your HTTP server
+$ec->full_dir = "images/";
+$ec->thumb_dir = "images/thumbs/";
+
+// Quality to make the thumbnail JPEGs
+$ec->jpeg_quality = 75;
+
+// Include the info tag in the thumbnails
+$ec->include_info_tag = 1;
+
+// Allow EasyCapture to store binaries too?
+$ec->enable_binary_capture = 0;
+$ec->binary_dir = "binary/";
+
+// Turn on all kinds of debug output
+$ec->debug = 0;
+
+// Require auth for various functions
+$ec->auth_delete = 1;
+$ec->auth_rename = 1;
+$ec->auth_capture = 0;
+
+// Set the username and password required to login
+$ec->admin_username = "";
+$ec->admin_password = "";
