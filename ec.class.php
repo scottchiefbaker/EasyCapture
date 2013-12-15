@@ -12,7 +12,7 @@ class ec_page {
 
 	//  function __construct() {
 	function ec_page() {
-		$this->version = "0.5.6";
+		$this->version = "0.5.7";
 		$this->auth_delete = 1;
 		$this->auth_rename = 1;
 		$this->auth_capture = 0;
