@@ -105,15 +105,12 @@ class ec_page {
 	}
 
 	 function get_files($offset = 0, $limit = 30, $filter = "") {
-		$offset = intval($offset);
-
 		if ($this->debug) { print "get_files: offset=$offset limit=$limit filter=$filter<br />\n"; }
 
-		$full_html_dir = $this->full_dir;
+		$offset         = intval($offset);
+		$full_html_dir  = $this->full_dir;
 		$thumb_html_dir = $this->thumb_dir;
 
-		// print "$full_html_dir - $thumb_html_dir $this->full_dir";
-	
 		$images = glob($this->full_dir . "/*");
 
 		// If we're getting binaries too, then get those as well
@@ -162,9 +159,19 @@ class ec_page {
 
 		if (!$for_sorting) { $this->error("No files found to show!"); }
 
-		// Sort the newly created array
-		krsort($for_sorting);
-		$sorted = $for_sorting;
+		if (isset($_GET['random'])) {
+			$i = array_rand($for_sorting,$limit);
+			foreach ($i as $key) {
+				$value      = $for_sorting[$key];
+				$done[$key] = $value;
+			}
+
+			$sorted = $done;
+		} else {
+			// Sort the newly created array
+			krsort($for_sorting);
+			$sorted = $for_sorting;
+		}
 
 		// Filter out what's not needed after the filter and the limits etc...
 		$count       = 0;
@@ -227,7 +234,8 @@ class ec_page {
 			$size  = sprintf("%.02f",$size);
 			$total = sizeof($info); // number of files in the dir
 
-			$stats = "$total files - {$size} megs - ";
+			$url   = $_SERVER['PHP_SELF'];
+			$stats = "$total files (<a href=\"$url?show=gallery&amp;random=true\">Random</a>) - {$size} megs - ";
 		}
 
 		$version = $this->version;
