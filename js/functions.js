@@ -31,7 +31,7 @@ function init_tabs() {
 	$(".tab_text").click(function() {
 		var name = $(this).data('tab_name');
 
-		$(".tab_text").css('font-weight','normal').css('color','gray');
+		$(".tab_text").css('font-weight','normal').css('color','gray').css('cursor','pointer');
 		$(this).css('font-weight','bold').css('color','black');
 
 		$('.url_wrapper').children().hide()
