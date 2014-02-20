@@ -153,23 +153,26 @@ if (!$img_info) {
 
 	$show_count = 1;
 	for ($i = 0; $i < $show_count; $i++) {
-		$filet  = "<input type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" /><br />\n";
+		$filet  = "<input class=\"file_input\" type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" />\n";
 
-		$urlt   = "<div class=\"url_wrapper\">";
 		$urlt  .= "\t<input class=\"url_input\" type=\"text\" name=\"url[]\" size=\"40\" />\n";
-		$urlt  .= "</div>\n";
 	}
 
 	//$filet .= "<input type=\"file\" multiple=\"true\" id=\"file_temp\" name=\"file_temp\" size=\"40\" /><br />\n";
 
 	if (($ec->auth_capture && $ec->valid_admin_login()) || !$ec->auth_capture) {
-		$output .= "<div class=\"small_text\">Image Upload:</div>
-	$filet
+		$output .= "
 
 	<br />
 
-	<div class=\"small_text\">URL Capture:</div>
+	<div class=\"tab_text\" data-tab_name=\"url_input\">URL Capture:</div>
+	<div class=\"tab_text\" data-tab_name=\"file_input\">Local File:</div>
+
+	<div class=\"url_wrapper\">
 	$urlt
+	$filet
+	</div>
+
 	<div class=\"max_file_size\">Max File Size: $max_upload</div>
 
 	<br />

@@ -23,7 +23,23 @@ $(document).ready(function() {
 		});
 	}
 
+	init_tabs();
+
 });
+
+function init_tabs() {
+	$(".tab_text").click(function() {
+		var name = $(this).data('tab_name');
+
+		$(".tab_text").css('font-weight','normal').css('color','gray');
+		$(this).css('font-weight','bold').css('color','black');
+
+		$('.url_wrapper').children().hide()
+		$('.' + name).show();
+	});
+
+	$(".tab_text").first().click();
+}
 
 function keyword_click(item) {
 	// Toggle adding/removing the selected class

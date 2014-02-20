@@ -159,3 +159,13 @@ body {
 	font-size: 1.2em;
 	text-align: center;
 }
+
+.tab_text {
+	margin-left   : 8px;
+	border-top    : 1px solid gray;
+	border-right  : 1px solid gray;
+	border-left   : 1px solid gray;
+	border-radius : 3px;
+	display       : inline-block;
+	padding       : 2px 2px 0 2px;
+}
