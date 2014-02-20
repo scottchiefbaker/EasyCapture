@@ -1,7 +1,7 @@
 // If you capture a bunch of similar files and want to quick categorize them add each "type" to the array
 // This will allow you to quick categorize (rename) your files by name
 var rename_words = new Array();
-	
+
 $(document).ready(function() {
 	if (rename_words.length > 0) {
 		var html = new Array();
@@ -16,7 +16,7 @@ $(document).ready(function() {
 		// Build the HTML and put it in the placeholder slot
 		html = "<br /><br /><b>Quick Rename:</b> " + html.join(" ");
 		$("#placeholder").after(html); // Put this strings of keywords after the button
-		 
+
 		// Add a click option to each keyword
 		$(".rename_keyword").click(function() {
 			var foo = keyword_click($(this));
@@ -28,7 +28,7 @@ $(document).ready(function() {
 function keyword_click(item) {
 	// Toggle adding/removing the selected class
 	$(item).toggleClass('keyword_selected');
-	
+
 	var selected = new Array(); // Reset the array so it's clean
 	var orig = $("#old_name").val();
 
@@ -43,7 +43,7 @@ function keyword_click(item) {
 	var period = $('#new_name').val().indexOf(".");
 	var ext = $('#new_name').val().substring(period);
 
-	if (selected.length == 0) { 
+	if (selected.length == 0) {
 		my_new_name = orig;
 	} else {
 		my_new_name += ext;
@@ -103,8 +103,8 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 //////////////////////////////////////////////////////////////////////////
 
 function sprintf ( ) {
-    // Return a formatted string  
-    // 
+    // Return a formatted string
+    //
     // version: 909.322
     // discuss at: http://phpjs.org/functions/sprintf
     // +   original by: Ash Searle (http://hexmen.com/blog/)
