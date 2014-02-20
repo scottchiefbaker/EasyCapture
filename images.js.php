@@ -13,7 +13,7 @@
 var body = document.getElementsByTagName('body')[0];
 var old_panel = document.getElementById('panel');
 
-if (old_panel) { 
+if (old_panel) {
 	body.removeChild(old_panel);
 }
 
@@ -51,7 +51,7 @@ if (images.length > 0) {
 		var my_src = images[i];
 		image_str += "<img src=\"" + my_src + "\" /> ";
 	}
-	
+
 	panel.appendChild(header);
 	panel.innerHTML = panel.innerHTML + image_str;
 
@@ -87,16 +87,16 @@ function add_click() {
 	var imgs = document.querySelectorAll('img');
 	var count = imgs.length;
 	var i = 0;
-	
+
 	for (i = 0; i < count ; i++) {
 		var myobj = imgs[i];
 		var form  = document.getElementById('my_form');
 		var url   = document.getElementById('my_url');
 
-		myobj.addEventListener('click',function() { 
+		myobj.addEventListener('click',function() {
 			var src = this.src;
 
-			url.value = src;	
+			url.value = src;
 			form.submit();
 		});
 	}

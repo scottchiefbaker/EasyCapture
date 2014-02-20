@@ -48,9 +48,9 @@ if (isset($_FILES['file']['size'])) {
 // Check to see if a file was uploaded from the local PC
 if ($total_upload_size > 0) {
 	$url = $ec->process_files();
-	if (!$url) { 
+	if (!$url) {
 		//print_r($_FILES);
-		$ec->error("No files found to process"); 
+		$ec->error("No files found to process");
 	}
 // Check to see if a URL was sent in via POST
 } else {
@@ -63,7 +63,7 @@ if ($total_upload_size > 0) {
 	} else {
 		$url = "";
 	}
-} 
+}
 
 $show     = var_set($_GET['show']);
 $action   = var_set($_GET['action']);
@@ -86,7 +86,7 @@ if ($action == "add_tag") {
 }
 
 // Show the gallery
-if ($show == "gallery") { 
+if ($show == "gallery") {
 	$ec->html($ec->show_gallery());
 // Show only one image
 } elseif ($show && $ec->get_file_info($show)) {
@@ -122,7 +122,7 @@ if ($url) {
 	}
 }
 
-if (!$img_info) { 
+if (!$img_info) {
 	$output = "";
 
 	if (!$ec->has_config) {
@@ -135,9 +135,8 @@ if (!$img_info) {
 	if (isset($_SERVER["HTTPS"])) { $http = "https://"; }
 	else { $http = "http://"; }
 
-
 	$js_location = $http . $_SERVER['SERVER_NAME'] . dirname($_SERVER['SCRIPT_NAME']) . "/images.js.php";
-	
+
 	$output .= "<div style=\"margin-bottom: 15px; \"><a href=\"javascript:void(z=document.body.appendChild(document.createElement('script')));void(z.language='javascript');void(z.type='text/javascript');void(z.src='$js_location');\">EasyCapture</a> (Bookmarklet)</div>\n";
 
 	$output .= "<div style=\"margin-bottom: 15px; \"><a href=\"$PHP_SELF?show=gallery\">Image Gallery</a></div>\n";
@@ -146,7 +145,7 @@ if (!$img_info) {
 
 	$output .= "<form method=\"post\" action=\"$PHP_SELF\" enctype=\"multipart/form-data\">
 	<!--
-	<input type=\"text\" name=\"url\" size=\"40\" value=\"URL ME!\" id=\"foo\" onclick=\"javascript: document.getElementById('foo').value = '';\" />	
+	<input type=\"text\" name=\"url\" size=\"40\" value=\"URL ME!\" id=\"foo\" onclick=\"javascript: document.getElementById('foo').value = '';\" />
 
 	<br />
 	<br />
@@ -197,6 +196,6 @@ if (!$img_info) {
 		$html .= $ec->show_image($filename,0);
 	}
 	$ec->html($html);
-	
+
 	exit;
 }

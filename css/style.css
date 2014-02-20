@@ -1,12 +1,12 @@
-.image { 
-	float: left; 
-	margin: 0 10px 15px 0; 
-	width: 200px; 
-	text-align: center; 
-	height: 250px; 
-	font-size: 0.7em; 
-	font-family: sans-serif; 
-	border: 0px solid; 
+.image {
+	float: left;
+	margin: 0 10px 15px 0;
+	width: 200px;
+	text-align: center;
+	height: 250px;
+	font-size: 0.7em;
+	font-family: sans-serif;
+	border: 0px solid;
 }
 
 div.image_link {
@@ -95,8 +95,8 @@ body {
 
 .main_body { margin: 0 5px 0 5px; }
 
-#login_user, #login_pass, #login_button { 
-	border: 1px solid black; 
+#login_user, #login_pass, #login_button {
+	border: 1px solid black;
 	font-size: 0.8em;
 }
 
@@ -127,7 +127,7 @@ body {
 }
 
 .footer_input {
-	border: 1px solid black; 
+	border: 1px solid black;
 	font-size: 0.8em;
 	width: 75%;
 }
