@@ -154,8 +154,11 @@ if (!$img_info) {
 
 	$show_count = 1;
 	for ($i = 0; $i < $show_count; $i++) {
-		$filet = "<input type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" /><br />\n";
-		$urlt  = "<input type=\"text\" name=\"url[]\" size=\"40\" /><br />\n";
+		$filet  = "<input type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" /><br />\n";
+
+		$urlt   = "<div class=\"url_wrapper\">";
+		$urlt  .= "\t<input class=\"url_input\" type=\"text\" name=\"url[]\" size=\"40\" />\n";
+		$urlt  .= "</div>\n";
 	}
 
 	//$filet .= "<input type=\"file\" multiple=\"true\" id=\"file_temp\" name=\"file_temp\" size=\"40\" /><br />\n";

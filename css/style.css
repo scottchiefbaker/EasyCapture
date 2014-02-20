@@ -145,3 +145,17 @@ body {
 	font-weight: bold;
 	background-color: #ECF8E0;
 }
+
+.url_wrapper {
+	border: 1px solid gray;
+	padding: 5px;
+	border-radius: 6px;
+	text-align: center;
+}
+
+.url_input {
+	width: 95%;
+	border: 0px;
+	font-size: 1.2em;
+	text-align: center;
+}
