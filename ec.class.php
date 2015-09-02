@@ -194,7 +194,7 @@ class ec_page {
 		return $ret;
 	}
 
-	 function show_gallery() {
+	function show_gallery() {
 		$full_html_dir  = $this->full_dir;
 		$thumb_html_dir = $this->thumb_dir;
 		$start          = microtime(1);
