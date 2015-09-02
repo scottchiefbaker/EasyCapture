@@ -331,6 +331,10 @@ class ec_page {
 		if ($shown_images >= $limit) {
 			$new_offset = $offset + $limit;
 			$older_link = "$PHP_SELF?show=gallery&amp;offset=$new_offset";
+			// If there's a filter put it in the older link
+			if (!empty($filter)) {
+				$older_link .= '&amp;filter=' . $filter;
+			}
 			$older_html = "<a href=\"$older_link\">Older</a>\n";
 		} else {
 			$older_html = "Older\n";
@@ -339,8 +343,13 @@ class ec_page {
 		// Setup the new offset link
 		if ($offset > 0) {
 			$new_offset = $offset - $limit;
+			$newer_link = "$PHP_SELF?show=gallery&amp;offset=$new_offset";
+			// If there's a filter add the filter to the newer link.
+			if (!empty($filter)) {
+				$newer_link .= '&amp;filter=' . $filter;
+			}
 			if ($new_offset < 0) { $new_offset = 0; }
-			$newer_html = "<a href=\"$PHP_SELF?show=gallery&amp;offset=$new_offset\">Newer</a>";
+			$newer_html = "<a href=\"$newer_link\">Newer</a>";
 		} else {
 			$newer_html = "Newer";
 		}
