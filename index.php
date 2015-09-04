@@ -152,6 +152,7 @@ if (!$img_info) {
 	-->";
 
 	$show_count = 1;
+	$urlt = ''; // initalize urlt;
 	for ($i = 0; $i < $show_count; $i++) {
 		$filet  = "<input class=\"file_input\" type=\"file\" multiple=\"true\" name=\"file[]\" id=\"file-$i\" size=\"40\" />\n";
 
