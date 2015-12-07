@@ -11,7 +11,7 @@ function var_set(&$value, $default = null) {
 class ec_page {
 
 	//  function __construct() {
-	function ec_page() {
+	function __construct() {
 		$this->version = "0.6.0";
 		$this->auth_delete = 1;
 		$this->auth_rename = 1;
