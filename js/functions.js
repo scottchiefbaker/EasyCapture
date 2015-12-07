@@ -25,7 +25,66 @@ $(document).ready(function() {
 
 	init_tabs();
 
+	$(".gallery_header").click(function() {
+		init_tag_select();
+	});
 });
+
+function init_tag_select() {
+	$("a.clickable").click(function(e) {
+		e.preventDefault(); // Don't actually propagate the click
+
+		var img = $(this).find("img");
+		var wrapper = $(".image_wrapper",$(this));
+
+		// If it's checked, then un-check it
+		if (wrapper.hasClass("js_selected")) {
+			wrapper.removeClass("js_selected");
+		} else {
+			var w = img.width();
+			var h = img.height();
+			wrapper.css("width",w);
+			wrapper.css("height",h);
+
+			wrapper.addClass("js_selected");
+		}
+
+		console.log(get_selected_files());
+	});
+
+	return true;
+}
+
+function get_selected_files() {
+	var ret = [];
+	$(".js_selected").each(function(index,e) {
+		var mimg = $("img",e);
+		var file = mimg.attr("src");
+		file = basename(file);
+
+		ret.push(file);
+	});
+
+	return ret;
+}
+
+// basename from http://phpjs.org/functions/basename/
+function basename(path, suffix) {
+	var b = path;
+	var lastChar = b.charAt(b.length - 1);
+
+	if (lastChar === '/' || lastChar === '\\') {
+		b = b.slice(0, -1);
+	}
+
+	b = b.replace(/^.*[\/\\]/g, '');
+
+	if (typeof suffix === 'string' && b.substr(b.length - suffix.length) == suffix) {
+		b = b.substr(0, b.length - suffix.length);
+	}
+
+	return b;
+}
 
 function init_tabs() {
 	$(".tab_text").click(function() {
