@@ -99,7 +99,7 @@ if ($show == "gallery") {
 // If there is no $url show the default options
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-$img_info = "";
+$img_info = [];
 if ($url) {
 
 	// This code checks for tar.gz and extracts them, and adds the files to the process queue

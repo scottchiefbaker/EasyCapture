@@ -483,12 +483,12 @@ class ec_page {
 		return $ret;
 	}
 
-	 function show_image($file_list,$show_all_link = 1) {
+	function show_image($file_list,$show_all_link = 1) {
 		if (!$file_list) { $this->error("No files sent to show_image"); }
 
 		if (!is_array($file_list)) {
 			$filename    = $file_list;
-			$file_list   = "";
+			$file_list   = [];
 			$file_list[] = $filename;
 		}
 
