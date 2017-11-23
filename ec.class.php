@@ -633,7 +633,8 @@ class ec_page {
 
 		if ($this->debug) { print "Filename for the thumbnail: <b>$thumb_filename</b><br />\n"; }
 
-		$file_contents = @join("",file($url));
+		//$file_contents = @join("",file($url));
+		$file_contents = file_get_contents($url);
 		if (!$file_contents) { $this->error("Could not download that file '$url'"); }
 
 		$filesize = strlen($file_contents);
