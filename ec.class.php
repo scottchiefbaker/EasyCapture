@@ -1,8 +1,7 @@
-<?PHP
+<?php
 
 class ec_page {
 
-	//  function __construct() {
 	function __construct() {
 		$this->version      = "0.6.5";
 		$this->auth_delete  = 1;
@@ -100,7 +99,7 @@ class ec_page {
 		exit;
 	}
 
-	 function get_files($offset = 0, $limit = 30, $filter = "") {
+	function get_files($offset = 0, $limit = 30, $filter = "") {
 		if ($this->debug) { print "get_files: offset=$offset limit=$limit filter=$filter<br />\n"; }
 
 		$offset         = intval($offset);
@@ -370,7 +369,7 @@ class ec_page {
 		return $out;
 	}
 
-	 function get_file_info($filename) {
+	function get_file_info($filename) {
 
 		if (is_array($filename)) {
 			if ($this->debug) { print "Image info for an Array!?! Return 0<br />\n\n"; }
@@ -695,7 +694,7 @@ class ec_page {
 		return $ret;
 	}
 
-	 function delete_file($filename) {
+	function delete_file($filename) {
 		if (!$this->authorized('delete')) {
 			$PHP_SELF = $_SERVER['PHP_SELF'];
 			$this->error("You are not allowed to delete images<br />Please <a href=\"$PHP_SELF?login=1\">login</a> first");
@@ -1437,6 +1436,5 @@ class ec_page {
 		$this->admin_username = "";
 		$this->admin_password = "";
 	}
-}
 
-?>
+} // End of class
