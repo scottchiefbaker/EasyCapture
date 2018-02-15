@@ -274,7 +274,7 @@ class ec_page {
 
 			$b64_filename = base64_encode($filename);
 
-			$footer .= "\t<div style=\"margin-bottom: 0em;\" class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
+			$footer .= "\t<div class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
 
 			if ($this->authorized("delete")) {
 				$footer .= $this->get_delete_link($filename);
