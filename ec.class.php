@@ -4,23 +4,27 @@ class ec_page {
 
 	//  function __construct() {
 	function __construct() {
-		$this->version = "0.6.0";
-		$this->auth_delete = 1;
-		$this->auth_rename = 1;
+		$this->version      = "0.6.5";
+		$this->auth_delete  = 1;
+		$this->auth_rename  = 1;
 		$this->auth_capture = 0;
-		$this->debug = 1;
-
-		$this->footer = "";
+		$this->debug        = 1;
+		$this->footer       = "";
 
 		umask(0133);
 
-		$this->image_extension = array("gif"=>1,"jpg"=>1,"png"=>1,"jpeg"=>1);
-		session_start();
+		$this->image_extension = array(
+			"gif"  => 1,
+			"jpg"  => 1,
+			"png"  => 1,
+			"jpeg" => 1,
+		);
 
+		session_start();
 	}
 
 	function html($html) {
-		$content = join("",file('html-template.html'));
+		$content = file_get_contents('html-template.html');
 
 		if (!$this->valid_admin_login(0)) {
 			$login_bar = $this->login_bar();
