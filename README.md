@@ -1,20 +1,16 @@
-EasyCapture
-===========
+# EasyCapture
 
-EasyCapture is a simple image hosting and capturing script.
+EasyCapture is a PHP based image hosting and capturing script.
 
-Installation
-------------
+### Installation
 
-Uncompress the code to a path in your web root. Copy the `config.php.sample`
-file to `config.php` after making any changes to fit your environment. That's
-it. You're ready to host and capture images.
+1. Uncompress the code to a path in your web root. 
+2. Copy the `config.php.sample` file to `config.php`
+3. Make changes to `config.php` to suit your environment
+4. Navigate to http://www.myserver.com/easy_capture/
 
-Point your browser to http://www.server.com/easy_capture/ to start using 
-EasyCapture.
+**Note:** The `images/` and `images/thumbs` directories need to be writable by your web server. If you forget EasyCapture will warn you the directory permissions are not correct.
 
-**Note:** The `images/` and `images/thumbs` directories need to be writable by your 
-web server. If you forget EasyCapture will warn you the directory permissions
-are not correct.
-
-Scott Baker
+### Requirements
+1. PHP 7.x
+2. PHP [GD Extensions](https://secure.php.net/manual/en/book.image.php)
