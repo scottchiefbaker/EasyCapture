@@ -1302,6 +1302,85 @@ class ec_page {
 		return $filesize;
 	}
 
+	private function image_scale($str,$target_width = 3000,$target_height = 3000) {
+		$size  = getimagesizefromstring($str);
+		$image = imagecreatefromstring($data);
+
+		$width  = $size[0];
+		$height = $size[1];
+
+		$ratio = $width / $height;
+		if ($height > $width) {
+			$new_height = 1080;
+			$new_width  = intval($new_height * $ratio);
+		} else {
+			$new_width  = 1920;
+			$new_height = intval($new_width / $ratio);
+		}
+
+		if ($new_height > $height || $new_width > $width) {
+			$this->error("Upsizing an image is not a good idea");
+		}
+
+		//printf("%dx%d (%f) => %dx%d (%f)",$width,$height,$width/$height,$new_width,$new_height,$new_width/$new_height); exit;
+
+		// Resize the image to the the new size
+		$image = imagescale($image,$new_width,$new_height);
+
+		return $image;
+	}
+
+	function resize($file) {
+		// Get the actual file
+		$data  = file_get_contents($file);
+		$image = imagecreatefromstring($data);
+
+		$size   = getimagesizefromstring($data);
+		$width  = $size[0];
+		$height = $size[1];
+
+		$ratio = $width / $height;
+		if ($height > $width) {
+			//$new_height = 1080;
+			$new_height = 3000;
+			$new_width  = intval($new_height * $ratio);
+		} else {
+			//$new_width  = 1920;
+			$new_width  = 3000;
+			$new_height = intval($new_width / $ratio);
+		}
+
+		if ($new_height > $height || $new_width > $width) {
+			$this->error("Upsizing an image is not a good idea");
+		}
+
+		//printf("%dx%d (%f) => %dx%d (%f)",$width,$height,$width/$height,$new_width,$new_height,$new_width/$new_height); exit;
+
+		// Resize the image to the the new size
+		$image = imagescale($image,$new_width,$new_height);
+
+		// Create the new filename
+		$parts = pathinfo($file);
+		$out_file = $this->full_dir . "/" . $parts['filename'] . "-resized.jpg";
+
+		// Save the newly created jpeg
+		$ok = imageJpeg($image,$out_file,$this->jpeg_quality);
+		if (!$ok) {
+			$this->error("Error resizing image");
+		}
+		$bytes = filesize($out_file);
+
+		// Make the thumbnail
+		$thumb = $this->create_thumbnail($image,$this->human_filesize($bytes));
+		$thumb_path = $this->thumb_dir . "/" . $parts['filename'] . "-resized.jpg";
+
+		if ($thumb) {
+			imagejpeg($thumb,$thumb_path,$this->jpeg_quality);
+		}
+
+		return $bytes;
+	}
+
 	function resample($file,$quality = 85) {
 		// Get the actual file
 		$data  = file_get_contents($file);
