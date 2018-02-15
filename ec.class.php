@@ -1,13 +1,5 @@
 <?PHP
 
-function var_set(&$value, $default = null) {
-	if (isset($value)) {
-		return $value;
-	} else {
-		return $default;
-	}
-}
-
 class ec_page {
 
 	//  function __construct() {
@@ -199,13 +191,11 @@ class ec_page {
 		$thumb_html_dir = $this->thumb_dir;
 		$start          = microtime(1);
 
-		$offset = intval(var_set($_GET['offset']));
-		$limit  = var_set($_GET['limit']);
-		$filter = var_set($_GET['filter']);
+		$offset = $_GET['offset'] ?? 0;
+		$limit  = $_GET['limit']  ?? 24;
+		$filter = $_GET['filter'] ?? "";
 
-		$limit || $limit = 24;
-
-		if (var_set($_GET['delete'])) {
+		if (!empty($_GET['delete'])) {
 			$this->delete_file($_GET['delete']);
 		} elseif (isset($_GET['old_name']) && isset($_GET['new_name'])) {
 			$this->rename_file($_GET['old_name'],$_GET['new_name']);
@@ -522,7 +512,7 @@ class ec_page {
 
 			$html_path       = $server_name . $img_info['full_html_path'];
 			$filename        = basename($html_path);
-			$thumb_html_path = var_set($img_info['thumb_html_path']);
+			$thumb_html_path = $img_info['thumb_html_path'] ?? null;
 			$filename        = $img_info['filename'];
 			$u_filename      = urlencode($img_info['filename']);
 
@@ -604,8 +594,8 @@ class ec_page {
 
 		// If it's an image name that already exists ask for overwrite
 		$info    = $this->get_file_info($filename);
-		$confirm = var_set($_POST['confirm']);
-		$action  = var_set($_GET['action']);
+		$confirm = $_POST['confirm'] ?? null;
+		$action  = $_GET['action']   ?? null;
 
 		// If it's an action (add/remove info tag) auto confirm
 		if ($action) { $confirm = 1; }
@@ -1231,8 +1221,8 @@ class ec_page {
 	}
 
 	function valid_admin_login($error_out = 1) {
-		$un  = var_set($_SESSION['username']);
-		$pwd = var_set($_SESSION['password']);
+		$un  = $_SESSION['username'] ?? null;
+		$pwd = $_SESSION['password'] ?? null;
 
 		static $pert;
 
