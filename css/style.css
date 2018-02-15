@@ -1,4 +1,4 @@
-.grid_wrapper {
+.gallery_wrapper {
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 }

@@ -266,7 +266,7 @@ class ec_page {
 
 		// This outputs what's in the $full array
 		$shown_images = 0;
-		$out .= "<div class=\"grid_wrapper\">\n";
+		$out .= "<div class=\"gallery_wrapper\">\n";
 
 		foreach(array_keys($files_to_show) as $filename) {
 			$footer = "<div class=\"image_footer\">";
