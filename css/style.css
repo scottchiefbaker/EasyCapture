@@ -12,6 +12,10 @@
 	padding     : 0 10px;
 }
 
+.image_link {
+	margin-bottom: 1em;
+}
+
 div.image_link {
 	word-wrap: break-word;
 }
@@ -209,3 +213,28 @@ body {
 .filter_input {
 	width: 100%;
 }
+
+/* This is for medium width devices - medium width desktops */
+@media (min-width: 1026px) and (max-width: 1400px) {
+	.gallery_wrapper {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* This is for medium width devices - tablets */
+@media (min-width: 641px) and (max-width: 1025px) {
+	.gallery_wrapper {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* This is for small width devices - phones */
+@media (min-width: 0px) and (max-width: 640px) {
+	.gallery_wrapper {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
