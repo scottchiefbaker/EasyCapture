@@ -66,9 +66,6 @@ body {
 }
 
 .back_to_menu {
-	font-size: 0.7em;
-	text-align: center;
-	margin-bottom: 15px;
 }
 
 .file_size {
@@ -118,13 +115,13 @@ body {
 }
 
 .footer_right {
-	width: 34%;
+	width: 33%;
 	float: left;
 	text-align: left;
 }
 
-.footer_filter {
-	width: 33%;
+.footer_middle {
+	width: 34%;
 	float: left;
 	text-align: center;
 }
@@ -201,4 +198,14 @@ body {
 	top      : 10px;
 	left     : 10px;
 	opacity  : 1;
+}
+
+.filter_bar {
+	margin        : auto;
+	width         : 60%;
+	margin-bottom : 1em;
+}
+
+.filter_input {
+	width: 100%;
 }

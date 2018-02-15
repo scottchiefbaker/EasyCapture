@@ -6,6 +6,7 @@ $(document).ready(function() {
 	//init_tag_select();
 	init_tabs();
 	init_rename();
+	init_filter();
 });
 
 function init_tag_select() {
@@ -332,4 +333,19 @@ function sprintf ( ) {
     };
 
     return format.replace(regex, doFormat);
+}
+
+function init_filter() {
+	$("#filter").on("keyup",function() {
+		var fval = $("#filter").val();
+
+		var opts = {
+			data: { action: "gallery_filter", filter: fval },
+			success: function(e) {
+				$(".gallery_wrapper").replaceWith(e.html);
+			},
+		};
+
+		$.ajax(opts);
+	});
 }

@@ -189,14 +189,13 @@ class ec_page {
 		return $ret;
 	}
 
-	function show_gallery() {
+	function show_gallery($include_header = 1, $filter = "") {
 		$full_html_dir  = $this->full_dir;
 		$thumb_html_dir = $this->thumb_dir;
 		$start          = microtime(1);
 
 		$offset = $_GET['offset'] ?? 0;
 		$limit  = $_GET['limit']  ?? 24;
-		$filter = $_GET['filter'] ?? "";
 
 		if (!empty($_GET['delete'])) {
 			$this->delete_file($_GET['delete']);
@@ -228,12 +227,18 @@ class ec_page {
 			$total = sizeof($info); // number of files in the dir
 
 			$url   = $_SERVER['PHP_SELF'];
-			$stats = "$total files (<a href=\"$url?show=gallery&amp;random=true\">Random</a>) - {$size} megs - ";
+
+			$stats     = "$total files (<a href=\"$url?show=gallery&amp;random=true\">Random</a>) - {$size} megs - ";
+			$stat_line = "<div class=\"back_to_menu\">$stats(<a href=\"index.php\">Back to Menu</a>)</div>\n\n";
 		}
 
-		$version = $this->version;
-		$out  = "<h2 class=\"gallery_header\">Easy Capture Version $version</h2>\n\n";
-		$out .= "<div class=\"back_to_menu\">$stats(<a href=\"index.php\">Back to Menu</a>)</div>\n\n";
+		$out = "";
+
+		if ($include_header) {
+			$version = $this->version;
+			$out .= "<h2 class=\"gallery_header\">Easy Capture Version $version</h2>\n\n";
+			$out .= $this->get_filter_bar_html();
+		}
 
 		$files_to_show = $this->get_files($offset,$limit,$filter);
 		if (!$files_to_show) { $this->error("No files to show"); }
@@ -243,17 +248,19 @@ class ec_page {
 		#print_r($full);
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
-		$out .= "<form method=\"get\" action=\"$PHP_SELF\" style=\"text-align: center; border: 0px solid; margin-bottom: 10px; display: none;\" id=\"form\">
-		<!--
-		-->
-		<input type=\"text\" size=\"50\" name=\"old_name_text\" value=\"old_name.jpg\" id=\"old_name_text\" disabled=\"disabled\" />
-		<input type=\"hidden\" size=\"30\" name=\"old_name\" value=\"old_name.jpg\" id=\"old_name\" />
-		rename to
-		<input type=\"text\" size=\"50\" name=\"new_name\" value=\"new_name.jpg\" id=\"new_name\" />
-		<input type=\"hidden\" size=\"30\" name=\"show\" value=\"gallery\" />
-		<input type=\"submit\" id=\"rename_button\" value=\"Rename\" onclick=\"javascript: return final_submit();\" />
-		<span id=\"placeholder\"></span>
-	</form>\n\n";
+		if ($include_header) {
+			$out .= "<form method=\"get\" action=\"$PHP_SELF\" style=\"text-align: center; border: 0px solid; margin-bottom: 10px; display: none;\" id=\"form\">
+				<!--
+				-->
+				<input type=\"text\" size=\"50\" name=\"old_name_text\" value=\"old_name.jpg\" id=\"old_name_text\" disabled=\"disabled\" />
+				<input type=\"hidden\" size=\"30\" name=\"old_name\" value=\"old_name.jpg\" id=\"old_name\" />
+				rename to
+				<input type=\"text\" size=\"50\" name=\"new_name\" value=\"new_name.jpg\" id=\"new_name\" />
+				<input type=\"hidden\" size=\"30\" name=\"show\" value=\"gallery\" />
+				<input type=\"submit\" id=\"rename_button\" value=\"Rename\" onclick=\"javascript: return final_submit();\" />
+				<span id=\"placeholder\"></span>
+				</form>\n\n";
+		}
 
 		#print join("<br />",$full) . "<br />;
 
@@ -357,16 +364,22 @@ class ec_page {
 
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
-		$filter_html = "<b>Filter:</b> <form method=\"get\" action=\"$PHP_SELF\" style=\"display: inline;\"><input type=\"input\" class=\"footer_input\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form>";
+		$middle = $stat_line;
 
 		$this->footer .= "<div class=\"gallery_footer\">
 			<div class=\"footer_right\">$older_html</div>
-			<div class=\"footer_filter\">$filter_html</div>
+			<div class=\"footer_middle\">$middle</div>
 			<div class=\"footer_left\">$newer_html</div>
 			<div class=\"clear\"></div>
 		</div>\n";
 
 		return $out;
+	}
+
+	function get_filter_bar_html() {
+		$ret = "<div class=\"filter_bar\"><form method=\"get\" action=\"$PHP_SELF\"><input type=\"input\" placeholder=\"File name filter...\" class=\"filter_input\" id=\"filter\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form></div>";
+
+		return $ret;
 	}
 
 	function get_file_info($filename) {

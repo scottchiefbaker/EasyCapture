@@ -105,7 +105,8 @@ if ($action == "add_tag") {
 
 // Show the gallery
 if ($show == "gallery") {
-	$ec->html($ec->show_gallery());
+	$filter = $_GET['filter'] ?? "";
+	$ec->html($ec->show_gallery(1,$filter));
 // Show only one image
 } elseif ($show && $ec->get_file_info($show)) {
 	$body = $ec->show_image($show);
@@ -225,8 +226,13 @@ if (!$img_info) {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 function handle_ajax() {
+	global $ec;
+
+	$filter = $_GET['filter'] ?? "";
+
 	$ret = [
-		'msg' => "AJAX",
+		'msg'  => "AJAX",
+		'html' => $ec->show_gallery(0,$filter),
 	];
 
 	$json = json_encode($ret);
