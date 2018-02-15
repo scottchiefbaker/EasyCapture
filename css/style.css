@@ -175,8 +175,6 @@ body {
 }
 
 .image_wrapper {
-	margin   : auto;
-	position : relative;
 }
 
 .image_wrapper > img {

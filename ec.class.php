@@ -320,7 +320,7 @@ class ec_page {
 
 				#$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
 
-				$out .= "<div class=\"image\">\n\t<a class=\"clickable\" href=\"$link_path\"><div class=\"image_wrapper\"><img src=\"$path\" alt=\"$filename\" /></div></a>\n\t$footer\n</div>\n\n";
+				$out .= "<div class=\"image image_wrapper\">\n\t<a class=\"clickable\" href=\"$link_path\"><img src=\"$path\" alt=\"$filename\" /></a>\n\t$footer\n</div>\n\n";
 				//$out .= "<div class=\"image\">\n\t<a class=\"clickable\" href=\"$link_path\"><img src=\"$path\" style=\"border: 1px solid green;\" alt=\"$filename\" /></a>\n\t$footer\n</div>\n\n";
 			// No thumbnail
 			} else {
