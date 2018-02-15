@@ -65,10 +65,24 @@ if ($total_upload_size > 0) {
 	}
 }
 
-$show     = var_set($_GET['show']);
-$action   = var_set($_GET['action']);
-$filename = var_set($_GET['filename']);
-$PHP_SELF = var_set($_SERVER['PHP_SELF']);
+$show     = $_GET['show']        ?? null;
+$action   = $_GET['action']      ?? null;
+$filename = $_GET['filename']    ?? null;
+$PHP_SELF = $_SERVER['PHP_SELF'] ?? null;
+
+if (!empty($_GET['show64'])) {
+	$file      = base64_decode($_GET['show64']);
+	$file_path = $ec->full_dir . "/" . $file;
+	$basename = dirname(__FILE__);
+	$full     = realpath($basename . "/" . $file_path);
+
+	if (is_readable($full)) {
+		$mime = mime_content_type($file_path);
+		header("Content-Type: $mime");
+		readfile($full);
+		exit;
+	}
+}
 
 // Check to see if they're removing/adding the info tag
 if ($action == "add_tag") {

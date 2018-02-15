@@ -270,13 +270,16 @@ class ec_page {
 			$footer = "<div class=\"image_footer\">";
 			$footer .= "<div class=\"image_actions\">";
 
-			$footer .= "\t<div class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
+			$b64_filename = base64_encode($filename);
+
+			$footer .= "\t<div style=\"margin-bottom: 0em;\" class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
 
 			if ($this->authorized("delete")) {
 				$footer .= $this->get_delete_link($filename);
 			}
 			if ($this->authorized("rename")) {
 				$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
+				$footer .= "\t | <span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">Show Masked</a></span>\n";
 				$footer .= "<br /><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
 				$footer .= " | <a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a>";
 			}
