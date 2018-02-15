@@ -277,7 +277,8 @@ class ec_page {
 			}
 			if ($this->authorized("rename")) {
 				$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
-				$footer .= " | <a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
+				$footer .= "<br /><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
+				$footer .= " | <a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a>";
 			}
 			$footer .= "</div>";
 			$footer .= "</div>";

@@ -81,6 +81,9 @@ if ($action == "add_tag") {
 	$ec->resample($ec->full_dir . "/" .$filename,85);
 	#$show = $filename;
 	$show = "gallery";
+} elseif ($action == "resize") {
+	$ec->resize($ec->full_dir . "/" .$filename);
+	$show = "gallery";
 } elseif ($action) {
 	$ec->error("Unknown action '$action'");
 }
