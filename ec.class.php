@@ -275,18 +275,25 @@ class ec_page {
 			$b64_filename = base64_encode($filename);
 
 			$footer .= "\t<div class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
+			$footer .= "\t<ul class=\"action_menu\">\n";
 
 			if ($this->authorized("delete")) {
-				$footer .= $this->get_delete_link($filename);
+				$footer .= "\t" . $this->get_delete_link($filename);
 			}
 			if ($this->authorized("rename")) {
-				$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
-				$footer .= "\t | <span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">Show Masked</a></span>\n";
-				$footer .= "<br /><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
-				$footer .= " | <a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a>";
+				//$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
+				//$footer .= "\t | <span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">Show Masked</a></span>\n";
+				//$footer .= "<br /><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
+				//$footer .= " | <a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a>";
+
+				$footer .= "\t\t<li><a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a></li>\n";
+				$footer .= "\t\t<li><span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">Show Masked</a></span></li>\n";
+				$footer .= "\t\t<li><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a></li>\n";
+				$footer .= "\t\t<li><a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a></li>\n";
 			}
-			$footer .= "</div>";
-			$footer .= "</div>";
+			$footer .= "\t</ul>\n";
+			$footer .= "</div>"; // Closes image_footer
+			$footer .= "</div>"; // Closes image_actions
 
 			//print_r($files_to_show);
 			//print "$filename<br />";
@@ -1305,7 +1312,7 @@ class ec_page {
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
 		$u_filename = urlencode($filename);
-		$ret = "\t<a href=\"$PHP_SELF?show=gallery&amp;delete=$u_filename\" onclick=\"javascript: return confirm('Really delete $filename?'); \">$text</a> ";
+		$ret = "\t<li><a href=\"$PHP_SELF?show=gallery&amp;delete=$u_filename\" onclick=\"javascript: return confirm('Really delete $filename?'); \">$text</a></li>\n";
 
 		return $ret;
 	}

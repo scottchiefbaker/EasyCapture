@@ -212,6 +212,14 @@ body {
 	width: 100%;
 }
 
+.action_menu {
+	text-align: left;
+}
+
+/* ========================================================================== */
+/* MEDIA QUERIES                                                              */
+/* ========================================================================== */
+
 /* This is for medium width devices - medium width desktops */
 @media (min-width: 1026px) and (max-width: 1400px) {
 	.gallery_wrapper {
@@ -235,4 +243,3 @@ body {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
-
