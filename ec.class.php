@@ -203,7 +203,7 @@ class ec_page {
 		$limit  = var_set($_GET['limit']);
 		$filter = var_set($_GET['filter']);
 
-		$limit || $limit = 30;
+		$limit || $limit = 24;
 
 		if (var_set($_GET['delete'])) {
 			$this->delete_file($_GET['delete']);
@@ -266,6 +266,8 @@ class ec_page {
 
 		// This outputs what's in the $full array
 		$shown_images = 0;
+		$out .= "<div class=\"grid_wrapper\">\n";
+
 		foreach(array_keys($files_to_show) as $filename) {
 			$footer = "<div class=\"image_footer\">";
 			$footer .= "<div class=\"image_actions\">";
@@ -329,6 +331,8 @@ class ec_page {
 
 			$shown_images++;
 		}
+
+		$out .= "</div>\n";
 		//print sprintf("%.3f seconds<br />",microtime(1) - $start);
 
 		// Only show the more if the page is full (i.e. there are more images)

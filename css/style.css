@@ -1,12 +1,15 @@
+.grid_wrapper {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+}
+
 .image {
-	float: left;
-	margin: 0 5px 15px 5px;
-	width: 200px;
-	text-align: center;
-	height: 250px;
-	font-size: 0.7em;
-	font-family: sans-serif;
-	border: 0px solid;
+	margin      : auto;
+	text-align  : center;
+	font-size   : 0.7em;
+	font-family : sans-serif;
+	border      : 0px solid;
+	padding     : 0 10px;
 }
 
 div.image_link {
@@ -177,6 +180,10 @@ body {
 
 .image_wrapper > img {
 	border: 1px solid black;
+}
+
+.image_footer {
+	margin-bottom: 15px;
 }
 
 .js_selected {
