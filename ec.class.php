@@ -1437,4 +1437,13 @@ class ec_page {
 		$this->admin_password = "";
 	}
 
+	public function is_ajax_request() {
+		// This is the JQuery way
+		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 } // End of class

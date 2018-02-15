@@ -3,6 +3,18 @@
 var rename_words = new Array();
 
 $(document).ready(function() {
+	//init_tag_select();
+	init_tabs();
+	init_rename();
+});
+
+function init_tag_select() {
+	$(".gallery_header").click(function() {
+		init_tag_select();
+	});
+}
+
+function init_rename() {
 	if (rename_words.length > 0) {
 		var html = new Array();
 
@@ -22,13 +34,7 @@ $(document).ready(function() {
 			var foo = keyword_click($(this));
 		});
 	}
-
-	init_tabs();
-
-	$(".gallery_header").click(function() {
-		init_tag_select();
-	});
-});
+}
 
 function init_tag_select() {
 	$("a.clickable").click(function(e) {

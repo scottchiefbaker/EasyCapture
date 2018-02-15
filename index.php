@@ -18,11 +18,14 @@ if (is_readable('config.php')) {
 // No more user editable settings past this point!!!
 /////////////////////////////////////////////////////////////////////////////////
 
+if ($ec->is_ajax_request()) {
+	handle_ajax();
+}
+
 $ec->sanity_check();
 
 $ec->title = "Easy Capture";
 $ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/style.css\" title=\"Default\" />";
-
 
 $ec->script[] = "js/jquery.js";
 $ec->script[] = "js/functions.js";
@@ -216,5 +219,18 @@ if (!$img_info) {
 	}
 	$ec->html($html);
 
+	exit;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+function handle_ajax() {
+	$ret = [
+		'msg' => "AJAX",
+	];
+
+	$json = json_encode($ret);
+	header('Content-type: application/json');
+	print $json;
 	exit;
 }
