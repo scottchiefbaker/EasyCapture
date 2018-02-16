@@ -177,8 +177,8 @@ body {
 .image_wrapper {
 }
 
-.image_wrapper > img {
-	border: 1px solid black;
+.image_wrapper img {
+	border: 1px solid #444;
 }
 
 .image_footer {
