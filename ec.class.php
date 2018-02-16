@@ -283,20 +283,17 @@ class ec_page {
 			$footer .= "\t<li class=\"li_action_menu\">&#9660; Actions\n";
 			$footer .= "\t<ul>\n";
 
-			if ($this->authorized("delete")) {
-				$footer .= "\t" . $this->get_delete_link($filename);
-			}
+			$footer .= "\t\t<li title=\"Create a link that obscures the file name\"><span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">&#128269; Show Masked</a></span></li>\n";
 			if ($this->authorized("rename")) {
-				//$footer .= "\n\t| <a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">Rename</a>";
-				//$footer .= "\t | <span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">Show Masked</a></span>\n";
-				//$footer .= "<br /><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a>";
-				//$footer .= " | <a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a>";
-
 				$footer .= "\t\t<li title=\"Change the name of the file\"><a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">&#x21b7; Rename</a></li>\n";
-				$footer .= "\t\t<li title=\"Create a link that obscures the file name\"><span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">&#128269; Show Masked</a></span></li>\n";
 				$footer .= "\t\t<li title=\"Resave the image to shrink file size\"><a href=\"$PHP_SELF?action=resample&filename=$filename\">&#x269d; Resample</a></li>\n";
 				$footer .= "\t\t<li title=\"Shrink large images to a more usable size\"><a href=\"$PHP_SELF?action=resize&filename=$filename\">&#x21e9; Resize</a></li>\n";
 			}
+
+			if ($this->authorized("delete")) {
+				$footer .= "\t" . $this->get_delete_link($filename);
+			}
+
 			$footer .= "\t</ul>\n";
 			$footer .= "\t</li>\n";
 			$footer .= "\t</ul>\n";
