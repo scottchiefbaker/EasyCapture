@@ -19,6 +19,13 @@ ul {
 	cursor    : pointer;
 }
 
+ul.dropdown .remove_menu {
+   background-color: #FFBCBC;
+}
+ul.dropdown .remove_menu:hover {
+   background-color: #FF4040;
+}
+
 /*
 	LEVEL ONE
 */

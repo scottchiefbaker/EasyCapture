@@ -1317,7 +1317,7 @@ class ec_page {
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
 		$u_filename = urlencode($filename);
-		$ret = "\t<li title=\"Delete the file\"><a href=\"$PHP_SELF?show=gallery&amp;delete=$u_filename\" onclick=\"javascript: return confirm('Really delete $filename?'); \">&#x2717; $text</a></li>\n";
+		$ret = "\t<li class=\"remove_menu\" title=\"Delete the file\"><a href=\"$PHP_SELF?show=gallery&amp;delete=$u_filename\" onclick=\"javascript: return confirm('Really delete $filename?'); \">&#x2717; $text</a></li>\n";
 
 		return $ret;
 	}
