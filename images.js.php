@@ -46,11 +46,12 @@ if (images.length > 0) {
 	panel.style.padding = '5px';
 	panel.id = 'panel';
 
-	var image_str = '';
+	var image_str = '<div class="cap_wrapper" style="display: grid; grid-template-columns: repeat(6, 1fr); grid-gap: 10px;">';
 	for (i in images) {
 		var my_src = images[i];
-		image_str += "<img src=\"" + my_src + "\" /> ";
+		image_str += "<div class=\"cap_image\"><img src=\"" + my_src + "\" /></div> ";
 	}
+	image_str += "</div>";
 
 	panel.appendChild(header);
 	panel.innerHTML = panel.innerHTML + image_str;

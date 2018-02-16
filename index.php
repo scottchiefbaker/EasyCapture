@@ -153,10 +153,7 @@ if (!$img_info) {
 	$PHP_SELF  = $_SERVER['PHP_SELF'];
 	$output   .= "<h2>Easy Capture $ec->version</h2>";
 
-	if (isset($_SERVER["HTTPS"])) { $http = "https://"; }
-	else { $http = "http://"; }
-
-	$js_location = $http . $_SERVER['SERVER_NAME'] . dirname($_SERVER['SCRIPT_NAME']) . "/images.js.php";
+	$js_location = "//" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['SCRIPT_NAME']) . "/images.js.php";
 
 	$output .= "<div style=\"margin-bottom: 15px; \"><a href=\"javascript:void(z=document.body.appendChild(document.createElement('script')));void(z.language='javascript');void(z.type='text/javascript');void(z.src='$js_location');\">EasyCapture</a> (Bookmarklet)</div>\n";
 
