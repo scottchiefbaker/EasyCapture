@@ -275,7 +275,9 @@ class ec_page {
 			$b64_filename = base64_encode($filename);
 
 			$footer .= "\t<div class=\"image_link\"><a href=\"$PHP_SELF?show=$filename\"><b>$filename</b></a></div>\n";
-			$footer .= "\t<ul class=\"action_menu\">\n";
+			$footer .= "\t<ul class=\"dropdown action_menu\">\n";
+			$footer .= "\t<li class=\"li_action_menu\">&#9660; Actions\n";
+			$footer .= "\t<ul>\n";
 
 			if ($this->authorized("delete")) {
 				$footer .= "\t" . $this->get_delete_link($filename);
@@ -291,6 +293,8 @@ class ec_page {
 				$footer .= "\t\t<li><a href=\"$PHP_SELF?action=resample&filename=$filename\">Resample</a></li>\n";
 				$footer .= "\t\t<li><a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a></li>\n";
 			}
+			$footer .= "\t</ul>\n";
+			$footer .= "\t</li>\n";
 			$footer .= "\t</ul>\n";
 			$footer .= "</div>"; // Closes image_footer
 			$footer .= "</div>"; // Closes image_actions

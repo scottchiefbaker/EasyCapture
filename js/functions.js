@@ -163,9 +163,6 @@ function rename_file(old_file,new_file) {
 
 function final_submit() {
 	return true;
-	document.getElementById('old_name').disabled = false;
-
-	return true;
 }
 
 function setSelectionRange(input, selectionStart, selectionEnd) {

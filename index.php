@@ -26,9 +26,11 @@ $ec->sanity_check();
 
 $ec->title = "Easy Capture";
 $ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/default.css\" title=\"Default\" />";
+$ec->link .= "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/dropdown_menu.css\" title=\"Default\" />";
 
 $ec->script[] = "js/jquery.js";
 $ec->script[] = "js/functions.js";
+$ec->script[] = "js/jquery.dropdownPlain.js";
 
 if (isset($_GET['check'])) {
 	$html = $ec->check_files();
