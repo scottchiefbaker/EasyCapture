@@ -358,9 +358,9 @@ class ec_page {
 			if (!empty($filter)) {
 				$older_link .= '&amp;filter=' . $filter;
 			}
-			$older_html = "<a href=\"$older_link\">Older</a>\n";
+			$older_html = "<a href=\"$older_link\">&#8592; Older</a>\n";
 		} else {
-			$older_html = "Older\n";
+			$older_html = "&#8592; Older\n";
 		}
 
 		// Setup the new offset link
@@ -372,9 +372,9 @@ class ec_page {
 				$newer_link .= '&amp;filter=' . $filter;
 			}
 			if ($new_offset < 0) { $new_offset = 0; }
-			$newer_html = "<a href=\"$newer_link\">Newer</a>";
+			$newer_html = "<a href=\"$newer_link\">Newer &#8594;</a>";
 		} else {
-			$newer_html = "Newer";
+			$newer_html = "Newer &#8594;";
 		}
 
 		$PHP_SELF = $_SERVER['PHP_SELF'];
