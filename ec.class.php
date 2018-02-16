@@ -152,7 +152,9 @@ class ec_page {
 			$for_sorting["$mtime-$file"] = $file;
 		}
 
-		if (!$for_sorting) { $this->error("No files found to show!"); }
+		if (!$for_sorting) {
+			$for_sorting = [];
+		}
 
 		if (isset($_GET['random'])) {
 			$i = array_rand($for_sorting,$limit);
@@ -241,7 +243,9 @@ class ec_page {
 		}
 
 		$files_to_show = $this->get_files($offset,$limit,$filter);
-		if (!$files_to_show) { $this->error("No files to show"); }
+		if (!$files_to_show) {
+			$files_to_show = [];
+		}
 
 		// This just gets a hash with the name=>mtime
 
