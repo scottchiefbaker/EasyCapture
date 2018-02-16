@@ -293,7 +293,7 @@ class ec_page {
 				//$footer .= " | <a href=\"$PHP_SELF?action=resize&filename=$filename\">Resize</a>";
 
 				$footer .= "\t\t<li title=\"Change the name of the file\"><a href=\"$PHP_SELF?show=gallery\" onclick=\"javascript: return rename_file('$filename',''); \">&#x21b7; Rename</a></li>\n";
-				$footer .= "\t\t<li title=\"Create a link that obscures the file name\"><span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">&#128083; Show Masked</a></span></li>\n";
+				$footer .= "\t\t<li title=\"Create a link that obscures the file name\"><span class=\"b64_image_link\"><a href=\"$PHP_SELF?show64=$b64_filename\">&#128269; Show Masked</a></span></li>\n";
 				$footer .= "\t\t<li title=\"Resave the image to shrink file size\"><a href=\"$PHP_SELF?action=resample&filename=$filename\">&#x269d; Resample</a></li>\n";
 				$footer .= "\t\t<li title=\"Shrink large images to a more usable size\"><a href=\"$PHP_SELF?action=resize&filename=$filename\">&#x21e9; Resize</a></li>\n";
 			}
