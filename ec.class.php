@@ -352,7 +352,7 @@ class ec_page {
 
 		// Only show the more if the page is full (i.e. there are more images)
 		if ($shown_images >= $limit) {
-			$new_offset = $offset + $limit;
+			$new_offset = $offset + $limit + 1;
 			$older_link = "$PHP_SELF?show=gallery&amp;offset=$new_offset";
 			// If there's a filter put it in the older link
 			if (!empty($filter)) {
