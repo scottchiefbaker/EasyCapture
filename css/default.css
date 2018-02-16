@@ -1,6 +1,6 @@
 .gallery_wrapper {
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(8, 1fr);
 	grid-gap: 10px;
 }
 
@@ -225,6 +225,14 @@ body {
 /* ========================================================================== */
 /* MEDIA QUERIES                                                              */
 /* ========================================================================== */
+
+/* This is for medium width devices - medium - high width desktops */
+@media (min-width: 1401px) and (max-width: 1800px) {
+	.gallery_wrapper {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+	}
+}
 
 /* This is for medium width devices - medium width desktops */
 @media (min-width: 1026px) and (max-width: 1400px) {
