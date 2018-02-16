@@ -1,6 +1,7 @@
 .gallery_wrapper {
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
+	grid-gap: 10px;
 }
 
 .image {
@@ -9,7 +10,6 @@
 	font-size   : 0.7em;
 	font-family : sans-serif;
 	border      : 0px solid;
-	padding     : 0 10px;
 }
 
 .image_link {
