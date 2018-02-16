@@ -25,7 +25,7 @@ if ($ec->is_ajax_request()) {
 $ec->sanity_check();
 
 $ec->title = "Easy Capture";
-$ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/style.css\" title=\"Default\" />";
+$ec->link = "<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"css/default.css\" title=\"Default\" />";
 
 $ec->script[] = "js/jquery.js";
 $ec->script[] = "js/functions.js";
