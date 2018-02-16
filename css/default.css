@@ -105,35 +105,35 @@ body {
 }
 
 .gallery_footer {
-	clear: both;
-	border-top: 1px solid black;
-	padding: 2px 3px 2px 3px;
-	font-size: 0.7em;
-	background-color: #fffee8;
+	padding-top           : 3px;
+	padding-bottom        : 5px;
+	border-top            : 1px solid #444;
+	font-size             : 0.7em;
+	background-color      : #fffee8;
+	position              : fixed;
+	bottom                : 0;
+	width                 : 100%;
+	display               : grid;
+	grid-template-columns : repeat(3, 1fr);
 }
 
 .footer_left {
-	width: 33%;
-	float: left;
-	text-align: right;
+	float            : left;
+	text-align       : left;
+	padding-left     : 5px;
+	/*background-color : yellow;*/
 }
 
 .footer_right {
-	width: 33%;
-	float: left;
-	text-align: left;
+	float            : left;
+	text-align       : right;
+	padding-right    : 5px;
+	/*background-color : red;*/
 }
 
 .footer_middle {
-	width: 34%;
-	float: left;
-	text-align: center;
-}
-
-.footer_input {
-	border: 1px solid black;
-	font-size: 0.8em;
-	width: 75%;
+	float      : left;
+	text-align : center;
 }
 
 .login_form {
@@ -203,17 +203,23 @@ body {
 }
 
 .filter_bar {
-	margin        : auto;
-	width         : 60%;
-	margin-bottom : 1em;
+	width : 100%;
 }
 
 .filter_input {
-	width: 100%;
+	border    : 1px solid #666;
+	font-size : 0.8em;
+	width     : 100%;
 }
 
 .action_menu {
 	text-align: left;
+}
+
+.sub_heading {
+	font-size     : 0.7em;
+	text-align    : center;
+	margin-bottom : 1em;
 }
 
 /* ========================================================================== */

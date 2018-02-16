@@ -231,7 +231,7 @@ class ec_page {
 			$url   = $_SERVER['PHP_SELF'];
 
 			$stats     = "$total files (<a href=\"$url?show=gallery&amp;random=true\">Random</a>) - {$size} megs - ";
-			$stat_line = "<div class=\"back_to_menu\">$stats(<a href=\"index.php\">Back to Menu</a>)</div>\n\n";
+			$stat_line = "<div class=\"sub_heading\">$stats(<a href=\"index.php\">Back to Menu</a>)</div>\n\n";
 		}
 
 		$out = "";
@@ -239,7 +239,7 @@ class ec_page {
 		if ($include_header) {
 			$version = $this->version;
 			$out .= "<h2 class=\"gallery_header\">Easy Capture Version $version</h2>\n\n";
-			$out .= $this->get_filter_bar_html();
+			$out .= $stat_line;
 		}
 
 		$files_to_show = $this->get_files($offset,$limit,$filter);
@@ -380,12 +380,12 @@ class ec_page {
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
 		$middle = $stat_line;
+		$middle = $this->get_filter_bar_html();
 
 		$this->footer .= "<div class=\"gallery_footer\">
-			<div class=\"footer_right\">$older_html</div>
+			<div class=\"footer_left\">$older_html</div>
 			<div class=\"footer_middle\">$middle</div>
-			<div class=\"footer_left\">$newer_html</div>
-			<div class=\"clear\"></div>
+			<div class=\"footer_right\">$newer_html</div>
 		</div>\n";
 
 		return $out;
