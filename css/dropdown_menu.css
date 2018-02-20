@@ -50,4 +50,3 @@ ul.dropdown ul li { font-weight: normal; background: #f6f6f6; color: #000; borde
 	LEVEL THREE
 */
 ul.dropdown ul ul         { left: 100%; top: 0; }
-ul.dropdown li:hover > ul { visibility: visible; }
