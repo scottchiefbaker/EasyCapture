@@ -214,6 +214,7 @@ body {
 
 .action_menu {
 	text-align: left;
+	min-width : 12em;
 }
 
 .sub_heading {
