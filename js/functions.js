@@ -339,7 +339,8 @@ function init_filter() {
 		var opts = {
 			data: { action: "gallery_filter", filter: fval },
 			success: function(e) {
-				$(".gallery_wrapper").replaceWith(e.html);
+				var my_html = e.html;
+				$(".gallery_wrapper").html(my_html);
 			},
 		};
 

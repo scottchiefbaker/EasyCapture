@@ -247,9 +247,6 @@ class ec_page {
 			$files_to_show = [];
 		}
 
-		// This just gets a hash with the name=>mtime
-
-		#print_r($full);
 		$PHP_SELF = $_SERVER['PHP_SELF'];
 
 		if ($include_header) {
@@ -266,11 +263,12 @@ class ec_page {
 				</form>\n\n";
 		}
 
-		#print join("<br />",$full) . "<br />;
+		if ($include_header) {
+			$out .= "<div class=\"gallery_wrapper\">\n";
+		}
 
 		// This outputs what's in the $full array
 		$shown_images = 0;
-		$out .= "<div class=\"gallery_wrapper\">\n";
 
 		foreach(array_keys($files_to_show) as $filename) {
 			$footer = "<div class=\"image_footer\">";
@@ -344,7 +342,9 @@ class ec_page {
 			$shown_images++;
 		}
 
-		$out .= "</div>\n";
+		if ($include_header) {
+			$out .= "</div>\n";
+		}
 		//print sprintf("%.3f seconds<br />",microtime(1) - $start);
 
 		// Only show the more if the page is full (i.e. there are more images)
