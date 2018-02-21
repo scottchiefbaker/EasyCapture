@@ -1,8 +1,7 @@
 $(function(){
 	// Show the menu on click (You can use "mouseover mouseout" here for the hover effect
-	$("ul.dropdown li").on("click",function() {
+	$("body").on("click", "ul.dropdown li", function() {
 		var is_vis = $('ul:first',this).css('visibility');
-		console.log(is_vis);
 
 		// Show the menu
 		if (is_vis =="hidden") {
