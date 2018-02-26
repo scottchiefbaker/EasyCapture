@@ -334,17 +334,28 @@ function sprintf ( ) {
 
 function init_filter() {
 	$("#filter").on("keyup",function() {
-		var fval = $("#filter").val();
+		delay(function() {
+			var fval = $("#filter").val();
 
-		var opts = {
-			data    : { action: "gallery_filter", filter: fval },
-			url     : "index.php",
-			success : function(e) {
-				var my_html = e.html;
-				$(".gallery_wrapper").html(my_html);
-			},
-		};
+			var opts = {
+				data    : { action: "gallery_filter", filter: fval },
+				url     : "index.php",
+				success : function(e) {
+					var my_html = e.html;
+					$(".gallery_wrapper").html(my_html);
+				},
+			};
 
-		$.ajax(opts);
+			$.ajax(opts);
+		}, 400);
 	});
 }
+
+// Also could use TypeWatch: https://github.com/dennyferra/TypeWatch
+var delay = (function(){
+	var timer = 0;
+	return function(callback, ms){
+		clearTimeout (timer);
+		timer = setTimeout(callback, ms);
+	};
+})();
