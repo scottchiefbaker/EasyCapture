@@ -337,8 +337,9 @@ function init_filter() {
 		var fval = $("#filter").val();
 
 		var opts = {
-			data: { action: "gallery_filter", filter: fval },
-			success: function(e) {
+			data    : { action: "gallery_filter", filter: fval },
+			url     : "index.php",
+			success : function(e) {
 				var my_html = e.html;
 				$(".gallery_wrapper").html(my_html);
 			},
