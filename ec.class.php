@@ -1035,9 +1035,9 @@ class ec_page {
 			#imagefilledrectangle($new_img,0,$new_h-$text_height,$new_w,$new_h,$black);
 			imagefilledrectangle($new_img,0,$new_h,$new_w,$new_h + $text_height,$black);
 
-			$font_file = "./emblem.ttf";
+			$font_file = __DIR__ . "/emblem.ttf";
 			$font_size = 9;
-			$padding = 3;
+			$padding   = 3;
 
 			// Images is too narrow for an info tag
 			if ($new_w <= 40) {
