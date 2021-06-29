@@ -17,6 +17,7 @@ class ec_page {
 			"jpg"  => 1,
 			"png"  => 1,
 			"jpeg" => 1,
+			"webp" => 1,
 		);
 
 		session_start();
@@ -389,7 +390,7 @@ class ec_page {
 	}
 
 	function get_filter_bar_html() {
-		$ret = "<div class=\"filter_bar\"><form method=\"get\" action=\"$PHP_SELF\"><input type=\"input\" placeholder=\"File name filter...\" class=\"filter_input\" id=\"filter\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form></div>";
+		$ret = "<div class=\"filter_bar\"><form method=\"get\" action=\".\"><input type=\"input\" placeholder=\"File name filter...\" class=\"filter_input\" id=\"filter\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form></div>";
 
 		return $ret;
 	}
@@ -398,7 +399,7 @@ class ec_page {
 
 		if (is_array($filename)) {
 			if ($this->debug) { print "Image info for an Array!?! Return 0<br />\n\n"; }
-			return 0;
+			return [];
 		}
 
 		if ($this->debug) { print "get_file_info for <b>$filename</b><br />\n"; }
@@ -424,7 +425,7 @@ class ec_page {
 		} else {
 			#print "$filename not found";
 			//exit;
-			return 0;
+			return [];
 		}
 
 		$ret['full_html_path'] = $this->clean_url("$full_html_dir/$filename");
@@ -629,7 +630,7 @@ class ec_page {
 		if ($action) { $confirm = 1; }
 
 		// If the file already exists, and they haven't confirmed
-		if ($info['full_html_path'] && !$confirm) {
+		if (!empty($info['full_html_path']) && !$confirm) {
 			$this->confirm_overwrite($url);
 		}
 
@@ -667,7 +668,7 @@ class ec_page {
 		$filesize = $this->human_filesize($filesize);
 
 		$img = @imagecreatefromstring($file_contents);
-		if (!$img) { $this->error("Something went wrong trying to capture <b>$filename</b>"); }
+		if (!$img) { $this->error("Something went wrong capturing image <b>$filename</b>"); }
 
 		$time = time();
 
