@@ -389,7 +389,7 @@ class ec_page {
 	}
 
 	function get_filter_bar_html() {
-		$ret = "<div class=\"filter_bar\"><form method=\"get\" action=\"$PHP_SELF\"><input type=\"input\" placeholder=\"File name filter...\" class=\"filter_input\" id=\"filter\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form></div>";
+		$ret = "<div class=\"filter_bar\"><form method=\"get\" action=\".\"><input type=\"input\" placeholder=\"File name filter...\" class=\"filter_input\" id=\"filter\" name=\"filter\" /><input type=\"hidden\" name=\"show\" value=\"gallery\" /></form></div>";
 
 		return $ret;
 	}
@@ -422,9 +422,9 @@ class ec_page {
 		if (is_readable($this->full_dir . "/$filename")) {
 			#print "Is readable";
 		} else {
-			#print "$filename not found";
+			//print "$filename not found";
 			//exit;
-			return 0;
+			return [];
 		}
 
 		$ret['full_html_path'] = $this->clean_url("$full_html_dir/$filename");
