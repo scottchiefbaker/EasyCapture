@@ -731,7 +731,7 @@ class ec_page {
 
 		// If there is a thumb we need to figure out where it is so we can delete it
 		$info = $this->get_file_info($filename);
-		$thumb_file = $info['thumb_html_path'];
+		$thumb_file = $info['thumb_html_path'] ?? "";
 
 		if ($this->is_binary_file($filename)) {
 			if (@unlink($this->binary_dir . "/$filename")) {
@@ -744,7 +744,7 @@ class ec_page {
 				$out .= "Info: Deleted fullsize <b>$filename</b><br />\n";
 			}
 
-			if (isset($thumb_file)) {
+			if (!empty($thumb_file)) {
 				unlink($thumb_file);
 				$out .= "Info: Deleted thumbnail <b>$filename</b><br />\n";
 			}
