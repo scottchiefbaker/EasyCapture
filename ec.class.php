@@ -639,12 +639,13 @@ class ec_page {
 		$thumb_filename = $this->file_without_ext($filename) . ".jpg";
 
 		$extension = $this->get_extension($filename);
+		$is_image  = $this->image_extension[$extension] ?? false;
 
 		// Binary capture is OFF and it's not an image
-		if (!$this->image_extension[$extension] && !$this->enable_binary_capture) {
+		if (!$is_image && !$this->enable_binary_capture) {
 			$this->error("Unknown extension '$extension'");
 		// Binary capture is on and it's not an image
-		} elseif (!$this->image_extension[$extension] && $this->enable_binary_capture) {
+		} elseif (!$is_image && $this->enable_binary_capture) {
 			$bytes = $this->binary_capture($url);
 			if ($bytes <= 0) {
 				$this->error("Something went wrong trying to capture <b>$filename</b>");
