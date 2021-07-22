@@ -120,10 +120,10 @@ function keyword_click(item) {
 	});
 
 	// Add a random number at the end
-	var num = sprintf("%05d",parseInt(Math.random() * 10000));
+	var num         = sprintf("%05d",parseInt(Math.random() * 99999));
 	var my_new_name = selected.join("_") + "_" + num;
-	var period = $('#new_name').val().indexOf(".");
-	var ext = $('#new_name').val().substring(period);
+	var period      = $('#new_name').val().indexOf(".");
+	var ext         = $('#new_name').val().substring(period);
 
 	if (selected.length == 0) {
 		my_new_name = orig;
