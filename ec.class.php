@@ -1369,11 +1369,11 @@ class ec_page {
 		$ratio = $width / $height;
 		if ($height > $width) {
 			//$new_height = 1080;
-			$new_height = 3000;
+			$new_height = 2560;
 			$new_width  = intval($new_height * $ratio);
 		} else {
 			//$new_width  = 1920;
-			$new_width  = 3000;
+			$new_width  = 2560;
 			$new_height = intval($new_width / $ratio);
 		}
 
