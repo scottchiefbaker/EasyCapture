@@ -92,17 +92,20 @@ body {
 .login_panel {
 	border-bottom: 1px solid black;
 	margin-left: 0px;
-	padding: 2px;
-	font-size: 0.7em;
+	padding: 6px;
 	background-color: #fffee8;
 }
 
-.main_body { margin: 0 5px 0 5px; }
-
-#login_user, #login_pass, #login_button {
-	border: 1px solid black;
-	font-size: 0.8em;
+.login_panel label {
+	width: 6em;
+	display: inline-block;
 }
+
+.login_panel form > div{
+	margin-top: 3px;
+}
+
+.main_body { margin: 0 6px 0 6px; }
 
 .gallery_footer {
 	padding-top           : 3px;
@@ -137,7 +140,6 @@ body {
 }
 
 .login_form {
-	display: inline;
 	border: 0px solid black;
 }
 
@@ -264,4 +266,8 @@ body {
 
 	.gallery_footer {
 		font-size : 2em;
+	}
+
+	.main_body {
+		margin: 0
 	}

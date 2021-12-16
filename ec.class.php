@@ -1242,7 +1242,7 @@ class ec_page {
 		$out .= "<form method=\"post\" action=\"$PHP_SELF\">\n";
 		$out .= "\t<input type=\"text\" name=\"username\" value=\"username\" /><br />\n";
 		$out .= "\t<input type=\"password\" name=\"password\" value=\"password\" /><br />\n";
-		$out .= "\t<input type=\"submit\" value=\"Login\" style=\"margin-top: 10px; \" />\n";
+		$out .= "\t<input type=\"submit\" value=\"Login\" style=\"margin-top: 10px;\" />\n";
 		$out .= "</form>\n";
 
 		$this->html($out);
@@ -1300,9 +1300,17 @@ class ec_page {
 		$ret = "<div class=\"login_panel\">
 	<form method=\"post\" class=\"login_form\" action=\"$PHP_SELF\">
 		<b>Login:</b>
-		<label>Username:</label> <input type=\"text\" name=\"username\" id=\"login_user\" />
-		<label>Password:</label> <input type=\"password\" id=\"login_pass\" name=\"password\" />
-		<input type=\"submit\" value=\"Login\" id=\"login_button\" />
+		<div class=\"\">
+			<label for=\"login_user\">Username:</label>
+			<input type=\"text\" name=\"username\" id=\"login_user\" placeholder=\"Username\" />
+		</div>
+		<div class=\"\">
+			<label for=\"login_pass\">Password:</label>
+			<input type=\"password\" id=\"login_pass\" name=\"password\" placeholder=\"Password\" />
+		</div>
+		<div class=\"\">
+			<input type=\"submit\" value=\"Login\" id=\"login_button\" />
+		</div>
 	</form>
 </div>\n\n";
 
