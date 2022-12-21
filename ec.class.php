@@ -1346,7 +1346,7 @@ class ec_page {
 		return $filesize;
 	}
 
-	private function image_scale($str,$target_width = 3000,$target_height = 3000) {
+	private function image_scale($str,$target_width = 3072,$target_height = 3072) {
 		$size  = getimagesizefromstring($str);
 		$image = imagecreatefromstring($data);
 
