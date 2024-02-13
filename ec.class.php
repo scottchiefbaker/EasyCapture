@@ -153,7 +153,7 @@ class ec_page {
 			$for_sorting["$mtime-$file"] = $file;
 		}
 
-		if (!$for_sorting) {
+		if (empty($for_sorting)) {
 			$for_sorting = [];
 		}
 
@@ -174,6 +174,7 @@ class ec_page {
 		// Filter out what's not needed after the filter and the limits etc...
 		$count       = 0;
 		$shown_count = 0;
+		$ret         = [];
 		foreach ($sorted as $filename) {
 			$count++;
 
