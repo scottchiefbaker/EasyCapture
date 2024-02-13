@@ -9,6 +9,7 @@ class ec_page {
 		$this->auth_capture = 0;
 		$this->debug        = 1;
 		$this->footer       = "";
+		$this->information  = "";
 
 		umask(0133);
 
