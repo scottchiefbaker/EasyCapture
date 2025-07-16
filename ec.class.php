@@ -1,6 +1,27 @@
 <?php
 
 class ec_page {
+	var $version               = 0;
+	var $auth_delete           = 0;
+	var $auth_rename           = 0;
+	var $auth_capture          = 0;
+	var $debug                 = 0;
+	var $footer                = '';
+	var $title                 = '';
+	var $link                  = '';
+	var $admin_username        = "";
+	var $admin_password        = "";
+	var $include_info_tag      = 0;
+	var $enable_binary_capture = 0;
+	var $has_config            = 0;
+	var $script                = [];
+	var $freetype;
+	var $binary_dir;
+	var $information;
+	var $image_extension;
+	var $full_dir;
+	var $thumb_dir;
+	var $jpeg_quality;
 
 	function __construct() {
 		$this->version      = "0.6.6";
