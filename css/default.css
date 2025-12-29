@@ -160,10 +160,10 @@ body {
 }
 
 .url_input {
-	width: 95%;
-	border: 0px;
-	font-size: 1.2em;
-	text-align: center;
+	width      : 95%;
+	border     : 1px solid #b9b9b9;
+	font-size  : 1.2em;
+	text-align : center;
 }
 
 .tab_text {
