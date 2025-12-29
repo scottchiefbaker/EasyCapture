@@ -54,7 +54,6 @@ class ec_page {
 			$login_bar = "";
 		}
 
-		#$style = $this->default_style();
 		$script = $this->script;
 		if (!is_array($script)) { $script = array($script); }
 		$body = $html;
@@ -98,7 +97,7 @@ class ec_page {
 	function error($html) {
 		$content = join("",file('html-template.html'));
 
-		#$style = $this->default_style();
+		$script_html = "";
 		if ($this->script) {
 			foreach ($this->script as $file) {
 				$script_html .= "<script type=\"text/javascript\" src=\"$file\"></script>\n";
@@ -107,13 +106,10 @@ class ec_page {
 
 		$body = "<h2 style=\"text-align: center; margin-top: 10em;\">$html</h2>";
 
-		#$body = preg_replace("/&/","&amp;",$body);
-
-		$content = preg_replace("/\{style\}/",$style,$content);
-		$content = preg_replace("/\{script\}/",$script_html,$content);
-		$content = preg_replace("/\{body\}/",$body,$content);
-		$content = preg_replace("/\{title\}/",$this->title,$content);
-		$content = preg_replace("/\{link\}/",$this->link,$content);
+		$content = preg_replace("/\{script\}/", $script_html, $content);
+		$content = preg_replace("/\{body\}/"  , $body       , $content);
+		$content = preg_replace("/\{title\}/" , $this->title, $content);
+		$content = preg_replace("/\{link\}/"  , $this->link , $content);
 
 		$content = preg_replace("/{\w+}/","",$content);
 
