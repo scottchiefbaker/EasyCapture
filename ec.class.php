@@ -24,7 +24,7 @@ class ec_page {
 	var $jpeg_quality;
 
 	function __construct() {
-		$this->version      = "0.6.6";
+		$this->version      = "0.6.7";
 		$this->auth_delete  = 1;
 		$this->auth_rename  = 1;
 		$this->auth_capture = 0;
