@@ -167,13 +167,14 @@ body {
 }
 
 .tab_text {
-	margin-left   : 8px;
-	border-top    : 1px solid gray;
-	border-right  : 1px solid gray;
-	border-left   : 1px solid gray;
-	border-radius : 3px;
-	display       : inline-block;
-	padding       : 2px 2px 0 2px;
+	margin-left             : 8px;
+	border-top              : 1px solid gray;
+	border-right            : 1px solid gray;
+	border-left             : 1px solid gray;
+	border-top-left-radius  : 3px;
+	border-top-right-radius : 3px;
+	display                 : inline-block;
+	padding                 : 3px 3px 0 3px;
 }
 
 .image_wrapper {

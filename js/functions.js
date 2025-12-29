@@ -97,8 +97,11 @@ function init_tabs() {
 	$(".tab_text").click(function() {
 		var name = $(this).data('tab_name');
 
-		$(".tab_text").css('font-weight','normal').css('color','gray').css('cursor','pointer');
-		$(this).css('font-weight','bold').css('color','black');
+		// Set all the tabs to non-selected
+		$(".tab_text").css('font-weight','normal').css('color','#bebebe').css('cursor','pointer').css('background', '');
+
+		// Set the clicked one to active
+		$(this).css('font-weight','bold').css('color','black').css('background', '#fffee8');
 
 		$('.url_wrapper').children().hide()
 		$('.' + name).show();
