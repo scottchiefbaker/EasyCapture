@@ -1082,12 +1082,15 @@ class ec_page {
 
 			#print_r($array);
 
-			$text_width = $array[4] - $array[0];
-			$left_offset = ($new_w - $text_width) / 2;
+			$text_width  = $array[4] - $array[0];
+			$left_offset = intval(($new_w - $text_width) / 2);
 
-			#print "$new_w ; $text_width ; {$array[6]} ; {$array[0]} ; $left_offset";
+			//print "$new_w ; $text_width ; {$array[6]} ; {$array[0]} ; $left_offset";
 
-			imagettftext($new_img,$font_size,0,$left_offset,($new_h + $text_height) - $padding,$white,$font_file,$image_text);
+			$x_cord = $left_offset;
+			$y_cord = intval(($new_h + $text_height) - $padding);
+
+			imagettftext($new_img,$font_size,0,$left_offset,$y_cord,$white,$font_file,$image_text);
 		}
 
 		return $new_img;
