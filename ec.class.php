@@ -1096,7 +1096,7 @@ class ec_page {
 	function confirm_overwrite($url) {
 		$filename = basename($url);
 
-		$html .= "<h1 class=\"large_header\">Image $filename already in use.</h1>\n";
+		$html  = "<h1 class=\"large_header\">Image $filename already in use.</h1>\n";
 		$html .= "<h2 class=\"medium_header\">Overwrite $filename?</h2>\n";
 
 		$html .= "<form method=\"post\" style=\"text-align: center;\">
